@@ -11,6 +11,7 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   userMenuOpen: boolean = false;
+  title = 'Tms-App';
 
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
