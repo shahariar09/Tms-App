@@ -1,0 +1,74 @@
+<p>assign-task works!</p>
+<div class="main-container">
+    <div class="form-wrapper">
+      <h1 class="form-title">Post Task</h1>
+      
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label class="form-label">Title*</label>
+          <input 
+            type="text" 
+            class="form-control"
+            formControlName="title" 
+            placeholder="Enter task title">
+          <div class="error-message" *ngIf="taskForm.get('title')?.invalid && taskForm.get('title')?.touched">
+            Title is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label">Description*</label>
+          <textarea 
+            class="form-control"
+            formControlName="description" 
+            placeholder="Enter task description"
+            rows="4">
+          </textarea>
+          <div class="error-message" *ngIf="taskForm.get('description')?.invalid && taskForm.get('description')?.touched">
+            Description is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label">Due Date*</label>
+          <input 
+            type="date" 
+            class="form-control"
+            formControlName="dueDate">
+          <div class="error-message" *ngIf="taskForm.get('dueDate')?.invalid && taskForm.get('dueDate')?.touched">
+            Due date is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label">Select the Priority*</label>
+          <select 
+            class="form-control"
+            formControlName="priority">
+            <option value="">Select Priority</option>
+            <option *ngFor="let level of priorityLevels" [value]="level">{{level}}</option>
+          </select>
+          <div class="error-message" *ngIf="taskForm.get('priority')?.invalid && taskForm.get('priority')?.touched">
+            Priority is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label class="form-label">Select the User*</label>
+          <select 
+            class="form-control"
+            formControlName="user">
+            <option value="">Select User</option>
+            <option *ngFor="let user of users" [value]="user">{{user}}</option>
+          </select>
+          <div class="error-message" *ngIf="taskForm.get('user')?.invalid && taskForm.get('user')?.touched">
+            User is required
+          </div>
+        </div>
+  
+        <div class="form-actions">
+          <button type="submit" class="submit-btn" [disabled]="taskForm.invalid">Post Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
