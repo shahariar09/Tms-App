@@ -1,13 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [RouterOutlet,CommonModule,RouterModule], // Import RouterOutlet
 })
 export class AppComponent {
-  title = 'Tms-App';
+  userMenuOpen: boolean = false;
+
+  toggleUserMenu() {
+    this.userMenuOpen = !this.userMenuOpen;
+  }
+
+  logClick(link: string): void {
+    console.log(`${link} clicked`);
+  }
+  
 }
