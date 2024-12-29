@@ -1,0 +1,109 @@
+
+/* Page container to center the form */
+.page-container {
+    display: flex; /* Enable flexbox */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    height: 100vh;   /* Full viewport height */
+    padding-top: 40px;
+    margin: 0; /* Remove default margin */
+    background-color: #f4f4f4; /* Optional: Background color for contrast */
+  }
+
+  .btn1 {
+    width: 100%; /* Take full width */
+    display: flex; /* Enable flexbox */
+    justify-content: flex-end; /* Align button to the right */
+    padding: 16px; /* Add padding for spacing */
+  }
+  .btn1 button {
+    background-color: #345e78; /* Primary blue color */
+    color: white; /* White text for contrast */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 8px 16px; /* Inner spacing for the button */
+    font-size: 16px; /* Font size for the button text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  
+    &:hover {
+      background-color: #155fa0; /* Darker shade of blue on hover */
+    }
+  
+    &:focus {
+      outline: none; /* Remove the default focus outline */
+      box-shadow: 0 0 4px rgba(25, 118, 210, 0.6); /* Add a focus shadow */
+    }
+  }
+  
+  /* Form wrapper styling */
+  .form-wrapper {
+    background-color: white; /* White background for the form */
+    padding: 32px; /* Padding around the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 400px; /* Optional: Limit the width of the form */
+    width: 100%; /* Ensure responsiveness */
+  }
+  
+  /* Reuse existing form and button styles */
+  .form-container {
+    width: 100%; /* Full-width container */
+    display: flex; /* Flexbox for layout */
+    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
+    gap: 16px; /* Space between form fields */
+    padding: 16px 0; /* Padding around each field group */
+  }
+  
+  .form-field {
+    display: flex;
+    flex-direction: column; /* Stack the label and input vertically */
+    width: 100%; /* Form field takes full width */
+  }
+  
+  label {
+    font-size: 14px; /* Label font size */
+    margin-bottom: 8px; /* Space between label and input */
+    color: #333; /* Label text color */
+  }
+  
+  input {
+    padding: 8px; /* Inner padding for the input field */
+    border: 1px solid #ccc; /* Border for the input field */
+    border-radius: 4px; /* Rounded corners for input field */
+    font-size: 14px; /* Input text size */
+    width: 100%; /* Input field takes full width */
+  }
+  
+  input:focus {
+    border-color: #1976d2; /* Highlight the border on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 4px rgba(25, 118, 210, 0.5); /* Add subtle shadow effect */
+  }
+  
+  .button-container {
+    display: flex; /* Enable flexbox for alignment */
+    justify-content: center; /* Center-align the button horizontally */
+    padding-top: 16px; /* Add some spacing above the button */
+  }
+  
+  .submit-button {
+    background-color: #345e78; /* Primary blue color */
+    color: white; /* White text for contrast */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners for a modern look */
+    padding: 8px 16px; /* Inner spacing for the button */
+    font-size: 16px; /* Set the font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  
+    &:hover {
+      background-color: #155fa0; /* Darker shade of blue on hover */
+    }
+  
+    &:focus {
+      outline: none; /* Remove the default focus outline */
+      box-shadow: 0 0 4px rgba(25, 118, 210, 0.6); /* Add a focus shadow */
+    }
+  }
+  

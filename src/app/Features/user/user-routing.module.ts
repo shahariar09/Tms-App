@@ -5,13 +5,13 @@ import { UserCreateComponent } from './pages/user-create/user-create.component';
 
 const routes: Routes = [
   {
-    path: 'list',
+    path: 'user-list',
     component: UserListComponent
   },
   {
-    path: 'create',
+    path: 'user-create',
     component: UserCreateComponent
-  }
+  },
 ];
 
 @NgModule({
@@ -19,3 +19,7 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class UserRoutingModule { }
+
+
+
+

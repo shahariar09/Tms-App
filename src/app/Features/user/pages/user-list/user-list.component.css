@@ -1,0 +1,16 @@
+.btn {
+    display: flex; /* Makes the container flexible */
+    justify-content: flex-end; /* Aligns child elements to the right */
+    padding: 16px; /* Adds spacing inside the container */
+    color: aliceblue;
+  }
+  
+  button {
+    background-color: #123456 !important; /* Sets button background color to blue */
+    
+    border: none; /* Removes any default border */
+    padding: 8px 16px; /* Adds spacing inside the button */
+    border-radius: 4px; /* Makes the corners slightly rounded */
+    cursor: pointer; /* Changes the cursor to a pointer on hover */
+  }
+  
