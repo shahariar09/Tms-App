@@ -35,7 +35,7 @@ export class UserListComponent implements OnInit {
   userList: IUser[] = [];
 
   constructor(private httpService: HttpService) {}
-  displayedColumns: string[] = ['Id', 'Name', 'Email','RoleId'];
+  displayedColumns: string[] = ['Id', 'Name', 'Email','RoleName'];
 
   ngOnInit(): void {
     this.httpService.getAllUsers().subscribe({

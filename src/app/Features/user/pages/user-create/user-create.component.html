@@ -1,4 +1,4 @@
-<div class="btn1">
+<!-- <div class="btn1">
   <button routerLink="/user/user-list" mat-raised-button >User List</button>
 </div>
 <div class="page-container">
@@ -9,24 +9,81 @@
       <div class="form-container">
         <div class="form-field">
           <label>Name</label>
-          <input type="text" placeholder="Name" formControlName="name"/>
+          <input type="text" placeholder="Name" formControlName="Name"/>
         </div>
       </div>
       <div class="form-container">
         <div class="form-field">
           <label>Email</label>
-          <input type="email" placeholder="Email" formControlName="email"/>
+          <input type="email" placeholder="Email" formControlName="Email"/>
         </div>
       </div>
       <div class="form-container">
         <div class="form-field">
-          <label>Phone</label>
-          <input type="text" placeholder="Phone" formControlName="phone"/>
+          <label for="RoleName">Role Name</label>
+          <select id="RoleName" formControlName="RoleName">
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+            <option value="Manager">Manager</option>
+          </select>
         </div>
-      </div>
+      </div>      
       <div class="button-container">
         <button class="submit-button">Submit</button>
       </div>
     </form>
   </div> 
+</div> -->
+
+
+<div class="btn1">
+  <button routerLink="/user/user-list" mat-raised-button>User List</button>
+</div>
+<div class="page-container">
+  <div class="form-wrapper">
+    <h4>Add User</h4>
+    <form [formGroup]="userForm" (ngSubmit)="save()">
+      <!-- Name Field -->
+      <div class="form-container">
+        <div class="form-field">
+          <label>Name <span class="required-star">*</span></label>
+          <input type="text" placeholder="Name" formControlName="Name" />
+          <div *ngIf="userForm.get('Name')?.invalid && userForm.get('Name')?.touched" class="error-message">
+            Name is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-container">
+        <div class="form-field">
+          <label>Email <span class="required-star">*</span></label>
+          <input type="email" placeholder="Email" formControlName="Email" />
+          <div *ngIf="userForm.get('Email')?.invalid && userForm.get('Email')?.touched" class="error-message">
+            Email is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Role Name Field -->
+      <div class="form-container">
+        <div class="form-field">
+          <label for="RoleName">Role Name <span class="required-star">*</span></label>
+          <select id="RoleName" formControlName="RoleName">
+            <option value="Admin">Admin</option>
+            <option value="User">User</option>
+            <option value="Manager">Manager</option>
+          </select>
+          <div *ngIf="userForm.get('RoleName')?.invalid && userForm.get('RoleName')?.touched" class="error-message">
+            Role Name is required.
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="button-container">
+        <button class="submit-button" [disabled]="userForm.invalid">Submit</button>
+      </div>
+    </form>
+  </div>
 </div>

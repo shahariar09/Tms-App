@@ -27,19 +27,20 @@ import { FormsModule, FormBuilder, ReactiveFormsModule, Validators } from '@angu
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-user-create',
   standalone: true,
-  imports: [MatInputModule, MatButtonModule, RouterLink, FormsModule, ReactiveFormsModule],
+  imports: [MatInputModule, MatButtonModule, RouterLink, FormsModule, ReactiveFormsModule,CommonModule],
   templateUrl: './user-create.component.html',
   styleUrls: ['./user-create.component.scss'],
 })
 export class UserCreateComponent {
   formBuilder = inject(FormBuilder);
   userForm = this.formBuilder.group({
-    name: ['', [Validators.required]],
-    email: ['', [Validators.required]],
-    phone: ['', [Validators.required]],
+    Name: ['', [Validators.required]],
+    Email: ['', [Validators.required]],
+    RoleName: ['User', [Validators.required]],
   });
 
   save() {
