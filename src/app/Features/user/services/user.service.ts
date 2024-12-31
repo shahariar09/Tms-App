@@ -29,9 +29,23 @@ export class HttpService {
     return this.http.get<any[]>(this.apiUrl+"/api/User/GetAllUsers");
   }
 
-  //post user
+  //create user
   createUser(user:any){
     return this.http.post(this.apiUrl+"/api/User/AddUser",user);
 
   }
+  //update user
+  // getUsers(userId:number): Observable<any[]> {
+  //   return this.http.get<any[]>(this.apiUrl+"/api/User/UpdateUser/"+userId);
+  // }
+  getUserById(userId: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/api/User/GetUserById/${userId}`);
+  }
+
+  updateUser(userId: number, user: any) {
+    return this.http.put(`${this.apiUrl}/api/User/UpdateUser/${userId}`, user);
+  }
+  
+  
+
 }

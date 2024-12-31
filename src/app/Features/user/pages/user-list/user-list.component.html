@@ -31,10 +31,15 @@
             <td mat-cell *matCellDef="let element"> {{element.RoleName}} </td>
           </ng-container>
 
-          <!-- <ng-container matColumnDef="RoleId">
-            <th mat-header-cell *matHeaderCellDef> Role Id </th>
-            <td mat-cell *matCellDef="let element"> {{element.RoleId}} </td>
-          </ng-container> -->
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let element"> 
+              <button mat-raised-button (click)="edit(element.Id)">Edit</button>
+              
+            </td>
+          </ng-container>
+
+          
       
           
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

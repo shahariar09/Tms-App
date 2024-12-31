@@ -1,28 +1,11 @@
-// import { Component, OnInit } from '@angular/core';
 
-// @Component({
-//   selector: 'app-user-list',
-//   templateUrl: './user-list.component.html',
-//   styleUrls: ['./user-list.component.css']
-// })
-// export class UserListComponent implements OnInit {
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
-
-import { Component, OnInit } from '@angular/core';
-//import { HttpService } from '../services/http.service';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
-//import { IUser } from '../interfaces/user';
 import { IUser } from '../../interfaces/user';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
@@ -32,10 +15,11 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./user-list.component.scss'],
 })
 export class UserListComponent implements OnInit {
+  router=inject(Router);
   userList: IUser[] = [];
 
   constructor(private httpService: HttpService) {}
-  displayedColumns: string[] = ['Id', 'Name', 'Email','RoleName'];
+  displayedColumns: string[] = ['Id', 'Name', 'Email','RoleName','Action'];
 
   ngOnInit(): void {
     this.httpService.getAllUsers().subscribe({
@@ -48,4 +32,12 @@ export class UserListComponent implements OnInit {
       },
     });
   }
+  edit(Id:number){
+    console.log(Id);
+    //edit
+    this.router.navigateByUrl("user/user-create/"+Id);
+    
+
+  }
+
 }
