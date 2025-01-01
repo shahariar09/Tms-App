@@ -13,7 +13,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUser } from '../interfaces/user';
+//import { IUser } from '../interfaces/user';
 
 @Injectable({
   providedIn: 'root',
@@ -39,12 +39,17 @@ export class HttpService {
   //   return this.http.get<any[]>(this.apiUrl+"/api/User/UpdateUser/"+userId);
   // }
   getUserById(userId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/api/User/GetUserById/${userId}`);
+    //return this.http.get<any>(`${this.apiUrl}/api/User/GetUserById/${userId}`);
+    return this.http.get<any[]>(this.apiUrl + '/api/User/GetUserById/'+userId);
   }
 
-  updateUser(userId: number, user: any) {
-    return this.http.put(`${this.apiUrl}/api/User/UpdateUser/${userId}`, user);
+  updateUser(userId: number, user: any): Observable<any> {
+    //return this.http.put(`${this.apiUrl}/api/User/UpdateUser/${userId}`, user);
+    return this.http.put<any[]>(this.apiUrl +'/api/User/UpdateUser/'+ userId,user);
   }
+
+
+  
   
   
 

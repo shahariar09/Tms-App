@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { HttpService } from '../../services/user.service';
 
 
+
 @Component({
   selector: 'app-user-create',
   standalone: true,
@@ -21,6 +22,7 @@ export class UserCreateComponent {
   route=inject(ActivatedRoute);
 
   userForm = this.formBuilder.group({
+    Id: 0,
     Name: ['', [Validators.required]],
     Email: ['', [Validators.required,Validators.email]],
     RoleId: [0, [Validators.required]],
@@ -33,16 +35,17 @@ ngOnInit(){
   this.userId=this.route.snapshot.params["Id"];
   if(this.userId){
     this.isEdit=true;
-    this.httpService.getUserById(this.userId).subscribe(
+    this.httpService.getUserById(this.userId).subscribe( 
       (result) => {
         console.log(result);
 
         this.userForm.patchValue({
+          Id: result.Id,
           Name: result.Name,
           Email: result.Email,
           RoleId: result.RoleId,
         });
-        this.userForm.controls.Email.disable(); //disable to change the email
+        //this.userForm.controls.Email.disable(); //disable to change the email
       },
       // (error) => {
       //   console.error('Error fetching user details:', error);
@@ -52,49 +55,39 @@ ngOnInit(){
 }
 
 
-// save() {
-//   if(this.isEdit) {
-//     this.httpService.updateUser(this.userId, this.userForm.value).subscribe(() => {
-//         console.log('User updated successfully');
-//         this.router.navigateByUrl('/user/user-list');
-//       },
-//       (error) => {
-//         console.error('Error updating user:', error);
-//       }
-//     );
-//   } else {
-//     this.httpService.createUser(this.userForm.value).subscribe(() => {
-      
-
-//         console.log('User created successfully');
-//         this.router.navigateByUrl('/user/user-list');
-//       },
-//       (error) => {
-//         console.error('Error creating user:', error);
-//       }
-//     );
-//   }
-// }
-
 save() {
   console.log(this.userForm.value);
-  // const user: IUser={
-  //   Name:this.userForm.value.Name!,
-  //   Email:this.userForm.value.Email!,
-  //   RoleId:this.userForm.value.Id!,
-  // }
-  // console.log('Submitting user:', user);
-  this.httpService.createUser(this.userForm.value).subscribe(()=>{
-    console.log("success");
-    this.router.navigateByUrl("/user/user-list");
-  });
+  
+
+
+  if(this.isEdit) {
+    this.httpService.updateUser(this.userId, this.userForm.value).subscribe((response) => {
+        console.log('User updated successfully',response);
+        this.router.navigateByUrl('/user/user-list');
+      },
+      // (error) => {
+      //   console.error('Error updating user:', error);
+      // }
+    );
+  } else {
+    this.httpService.createUser(this.userForm.value).subscribe((response) => {
+      
+
+        console.log('User created successfully',response);
+        this.router.navigateByUrl('/user/user-list');
+      },
+      // (error) => {
+      //   console.error('Error creating user:', error);
+      // }
+    );
+  }
+}
 
 }
 
 
 
-
-  }
+  
 
 
 
