@@ -35,6 +35,7 @@
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element"> 
               <button mat-raised-button (click)="edit(element.Id)">Edit</button>
+              <button mat-raised-button (click)="delete(element.Id)">Delete</button>
               
             </td>
           </ng-container>

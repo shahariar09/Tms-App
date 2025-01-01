@@ -32,11 +32,17 @@ export class UserListComponent implements OnInit {
       },
     });
   }
+  //edit
   edit(Id:number){
     console.log(Id);
-    //edit
     this.router.navigateByUrl("user/user-create/"+Id);
-    
+  }
+
+  delete(Id:number){
+    this.httpService.deleteUser(Id).subscribe(()=>{
+      console.log("delete");
+      this.userList=this.userList.filter(x=>x.Id!=Id);
+    })
 
   }
 

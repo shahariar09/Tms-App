@@ -34,10 +34,7 @@ export class HttpService {
     return this.http.post(this.apiUrl+"/api/User/AddUser",user);
 
   }
-  //update user
-  // getUsers(userId:number): Observable<any[]> {
-  //   return this.http.get<any[]>(this.apiUrl+"/api/User/UpdateUser/"+userId);
-  // }
+  
   getUserById(userId: number): Observable<any> {
     //return this.http.get<any>(`${this.apiUrl}/api/User/GetUserById/${userId}`);
     return this.http.get<any[]>(this.apiUrl + '/api/User/GetUserById/'+userId);
@@ -47,6 +44,13 @@ export class HttpService {
     //return this.http.put(`${this.apiUrl}/api/User/UpdateUser/${userId}`, user);
     return this.http.put<any[]>(this.apiUrl +'/api/User/UpdateUser/'+ userId,user);
   }
+
+  deleteUser(userId: number){
+    //return this.http.put(`${this.apiUrl}/api/User/UpdateUser/${userId}`, user);
+    return this.http.delete(this.apiUrl +'/api/User/DeleteUser/'+ userId);
+  }
+
+
 
 
   
