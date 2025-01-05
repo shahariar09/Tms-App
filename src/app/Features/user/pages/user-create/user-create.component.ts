@@ -25,7 +25,7 @@ export class UserCreateComponent {
     Id: 0,
     Name: ['', [Validators.required]],
     Email: ['', [Validators.required,Validators.email]],
-    RoleId: [0, [Validators.required]],
+    RoleId: [null, [Validators.required]],
   });
 
 //edit
@@ -47,9 +47,7 @@ ngOnInit(){
         });
         //this.userForm.controls.Email.disable(); //disable to change the email
       },
-      // (error) => {
-      //   console.error('Error fetching user details:', error);
-      // }
+      
     );
   }
 }
@@ -58,16 +56,16 @@ ngOnInit(){
 save() {
   console.log(this.userForm.value);
   
-
+  if (this.userForm.invalid) {
+    return; // Prevent submission if form is invalid
+  }
 
   if(this.isEdit) {
     this.httpService.updateUser(this.userId, this.userForm.value).subscribe((response) => {
         console.log('User updated successfully',response);
         this.router.navigateByUrl('/user/user-list');
       },
-      // (error) => {
-      //   console.error('Error updating user:', error);
-      // }
+      
     );
   } else {
     this.httpService.createUser(this.userForm.value).subscribe((response) => {
@@ -76,9 +74,7 @@ save() {
         console.log('User created successfully',response);
         this.router.navigateByUrl('/user/user-list');
       },
-      // (error) => {
-      //   console.error('Error creating user:', error);
-      // }
+      
     );
   }
 }

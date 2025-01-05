@@ -1,103 +1,85 @@
-<!-- <div class="btn1">
-  <button routerLink="/user/user-list" mat-raised-button >User List</button>
-</div>
-<div class="page-container">
-  
-  <div class="form-wrapper">
-    <h4>Add User</h4>
-    <form [formGroup]="userForm" (ngSubmit)="save()">
-      <div class="form-container">
-        <div class="form-field">
-          <label>Name</label>
-          <input type="text" placeholder="Name" formControlName="Name"/>
-        </div>
-      </div>
-      <div class="form-container">
-        <div class="form-field">
-          <label>Email</label>
-          <input type="email" placeholder="Email" formControlName="Email"/>
-        </div>
-      </div>
-      <div class="form-container">
-        <div class="form-field">
-          <label for="RoleName">Role Name</label>
-          <select id="RoleName" formControlName="RoleName">
-            <option value="Admin">Admin</option>
-            <option value="User">User</option>
-            <option value="Manager">Manager</option>
-          </select>
-        </div>
-      </div>      
-      <div class="button-container">
-        <button class="submit-button">Submit</button>
-      </div>
-    </form>
-  </div> 
-</div> -->
+<div class="container">
+  <!-- User List Button -->
+  <div class="d-flex justify-content-end my-3">
+    <button class="btn btn-primary" routerLink="/user/user-list">User List</button>
+  </div>
 
+  <!-- Form Container -->
+  <div class="d-flex justify-content-center align-items-center vh-80">
+    <div class="card shadow-sm p-4" style="width: 400px;">
+      <h4 class="text-center mb-4">{{ isEdit ? 'Edit User Details' : 'Add User' }}</h4>
 
-<div class="btn1">
-  <button routerLink="/user/user-list" mat-raised-button>User List</button>
-</div>
-<div class="page-container">
-  <div class="form-wrapper">
-    @if(isEdit){
-      <h4>Edit User Details</h4>
-    }
-    @else{
-      <h4>Add User</h4>
-    }
-    <form [formGroup]="userForm" (ngSubmit)="save()">
-      <!-- Name Field -->
-      <div class="form-container">
-        <div class="form-field">
-          <label>Name <span class="required-star">*</span></label>
-          <input type="text" placeholder="Name" formControlName="Name" />
-          <div *ngIf="userForm.get('Name')?.invalid && userForm.get('Name')?.touched" class="error-message">
+      <form [formGroup]="userForm" (ngSubmit)="save()">
+        <!-- Name Field -->
+        <div class="mb-3">
+          <label for="Name" class="form-label">Name<span class="text-danger">*</span></label>
+          <input
+            id="Name"
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            formControlName="Name"
+          />
+          <div
+            *ngIf="userForm.get('Name')?.invalid && userForm.get('Name')?.touched"
+            class="text-danger"
+          >
             Name is required.
           </div>
         </div>
-      </div>
 
-      <!-- Email Field -->
-      <div class="form-container">
-        <div class="form-field">
-          <label>Email <span class="required-star">*</span></label>
-          <input type="email" placeholder="Email" formControlName="Email" />
-          <div *ngIf="userForm.get('Email')?.invalid && userForm.get('Email')?.touched" class="error-message">
-            Email is required.
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="Email" class="form-label">Email<span class="text-danger">*</span></label>
+          <input
+            id="Email"
+            type="email"
+            class="form-control"
+            placeholder="Email"
+            formControlName="Email"
+          />
+          <div
+            *ngIf="userForm.get('Email')?.invalid && userForm.get('Email')?.touched"
+            class="text-danger"
+          >
+            Email is required and must be a valid email address.
           </div>
         </div>
-      </div>
 
-      <!-- Role Name Field -->
-      <div class="form-container">
-        <div class="form-field">
-          <label for="RoleName">Role Name <span class="required-star">*</span></label>
-          <select id="RoleName" formControlName="RoleId">
-            <option value="" disabled selected>Select Role</option> 
+        <!-- Role Name Field -->
+        <div class="mb-3">
+          <label for="RoleName" class="form-label">Role Name<span class="text-danger">*</span></label>
+          <select
+            id="RoleName"
+            class="form-select"
+            formControlName="RoleId"
+          >
+            <option value="" disabled selected>Select Role</option>
             <option value="1">Admin</option>
-            <option value="2" selected>User</option>
+            <option value="2">User</option>
             <option value="3">Manager</option>
           </select>
-          <div *ngIf="userForm.get('RoleId')?.invalid && userForm.get('RoleId')?.touched" class="error-message">
+          <div
+            *ngIf="userForm.get('RoleId')?.invalid && userForm.get('RoleId')?.touched"
+            class="text-danger"
+          >
             Role Name is required.
           </div>
         </div>
-      </div>
 
-
-      
-
-      <!-- Submit Button -->
-      <div class="button-container">
-        @if(isEdit){
-          <button class="submit-button" [disabled]="userForm.invalid">Update</button>
-        }
-        @else{
-          <button class="submit-button" [disabled]="userForm.invalid">Add</button>
-        }
-      </div>
-    </form>
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button
+            class="btn btn-success"
+            [disabled]="userForm.invalid"
+            type="submit"
+          >
+            {{ isEdit ? 'Update' : 'Add' }}
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
+
+
