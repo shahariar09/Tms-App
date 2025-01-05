@@ -33,17 +33,42 @@ export class UserListComponent implements OnInit {
     });
   }
   //edit
-  edit(Id:number){
-    console.log(Id);
-    this.router.navigateByUrl("user/user-create/"+Id);
-  }
+  // edit(Id:number){
+  //   console.log(Id);
+  //   this.router.navigateByUrl("user/user-create/"+Id);
+  // }
 
-  delete(Id:number){
-    this.httpService.deleteUser(Id).subscribe(()=>{
-      console.log("delete");
-      this.userList=this.userList.filter(x=>x.Id!=Id);
-    })
+  // delete(Id:number){
+  //   this.httpService.deleteUser(Id).subscribe(()=>{
+  //     console.log("delete");
+  //     this.userList=this.userList.filter(x=>x.Id!=Id);
+  //   })
 
+  // }
+
+  edit(Id: number | undefined): void { 
+    if (Id !== undefined && Id !== null) {
+        console.log("Editing user with Id:", Id);
+        this.router.navigateByUrl(`user/user-create/${Id}`);
+    } else {
+        console.error("Invalid Id provided for edit:", Id);
+    }
+}
+delete(Id: number | undefined): void {
+  if (Id !== undefined && Id !== null) {
+      this.httpService.deleteUser(Id).subscribe(
+          () => {
+              console.log("Deleted user with Id:", Id);
+              this.userList = this.userList?.filter(user => user.Id !== Id);
+          },
+          error => {
+              console.error("Failed to delete user with Id:", Id, "Error:", error);
+          }
+      );
+  } else {
+      console.error("Invalid Id provided for delete:", Id);
   }
+}
+
 
 }
