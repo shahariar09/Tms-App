@@ -61,9 +61,9 @@ delete(Id: number | undefined): void {
               console.log("Deleted user with Id:", Id);
               this.userList = this.userList?.filter(user => user.Id !== Id);
           },
-          error => {
-              console.error("Failed to delete user with Id:", Id, "Error:", error);
-          }
+          // error => {
+          //     console.error("Failed to delete user with Id:", Id, "Error:", error);
+          // }
       );
   } else {
       console.error("Invalid Id provided for delete:", Id);

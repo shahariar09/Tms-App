@@ -1,0 +1,84 @@
+<div class="container">
+  <!-- User List Button -->
+  <div class="d-flex justify-content-end my-3">
+    <button class="btn btn-primary" routerLink="/project-module/Project-list">Project List</button>
+  </div>
+
+  <!-- Form Container -->
+  <div class="d-flex justify-content-center align-items-center vh-80">
+    <div class="card shadow-sm p-4" style="width: 400px;">
+      <h4 class="text-center mb-4">{{ isEdit ? 'Edit Project Details' : 'Add Project' }}</h4>
+
+      <form [formGroup]="projectForm" (ngSubmit)="save()">
+
+        <!-- Name Field -->
+        <div class="mb-3">
+          <label for="Name" class="form-label">Name<span class="text-danger">*</span></label>
+          <input
+            id="Name"
+            type="text"
+            class="form-control"
+            placeholder="Name"
+            formControlName="Name"
+          />
+          <div
+            *ngIf="projectForm.get('Name')?.invalid && projectForm.get('Name')?.touched"
+            class="text-danger"
+          >
+            Name is required.
+          </div>
+        </div>
+
+        <!-- Email Field -->
+        <div class="mb-3">
+          <label for="Description" class="form-label">Description<span class="text-danger">*</span></label>
+          <input
+            id="Description"
+            type="text"
+            class="form-control"
+            placeholder="Description"
+            formControlName="Description"
+          />
+          <div
+            *ngIf="projectForm.get('Description')?.invalid && projectForm.get('Description')?.touched"
+            class="text-danger"
+          >
+          Description is required.
+          </div>
+        </div>
+
+        <!-- Due Date Field -->
+        <div class="mb-3">
+          <label for="DueDate" class="form-label">Due Date<span class="text-danger">*</span></label>
+          <input
+            id="DueDate"
+            type="date"
+            class="form-control"
+            placeholder="Due Date"
+            formControlName="DueDate"
+          />
+          <div
+            *ngIf="projectForm.get('DueDate')?.invalid && projectForm.get('DueDate')?.touched"
+            class="text-danger"
+          >
+            Due Date is required.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button
+            class="btn btn-success"
+            [disabled]="projectForm.invalid"
+            type="submit"
+          >
+            {{ isEdit ? 'Update' : 'Add' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+

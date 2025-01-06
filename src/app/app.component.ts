@@ -24,10 +24,14 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   userMenuOpen: boolean = false;
+  projectMenuOpen: boolean = false;;
   
 
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
+  }
+  toggleProjectMenu(){
+    this.projectMenuOpen = !this.projectMenuOpen;
   }
 
   logClick(link: string): void {

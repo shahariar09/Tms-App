@@ -13,6 +13,23 @@
       </ul>
 
     </div> 
+    <!-- Project Section -->
+    <div class="menu-section">
+      <div class="menu-header" (click)="toggleProjectMenu()">
+        <span>&#128736; Project</span>
+        <span [class]="projectMenuOpen ? 'arrow-up' : 'arrow-down'"></span>
+      </div>
+      <ul *ngIf="projectMenuOpen" class="submenu">
+        <li><a routerLink="/project-module/project-create" routerLinkActive="active">Create Project</a></li>
+        <li><a routerLink="/project-module/Project-list" routerLinkActive="active">Project List</a></li>
+      </ul>
+    </div>
+
+
+
+
+
+
   </aside>
 
   <!-- Main content -->
