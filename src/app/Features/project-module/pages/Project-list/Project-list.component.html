@@ -9,17 +9,17 @@
   <table class="table table-striped table-hover">
       <thead class="table-dark">
           <tr>
-              <th scope="col" style="width: 10%;">Id</th>
+              <!-- <th scope="col" style="width: 10%;">Id</th> -->
               <th scope="col" style="width: 20%;">Project Name</th>
               <th scope="col" style="width: 30%;">Description</th>
-              <th scope="col" style="width: 25%;">Due Date</th>
-              <th scope="col" style="width: 15%;">Action</th>
+              <th scope="col" style="width: 30%;">Due Date</th>
+              <th scope="col" style="width: 20%;">Action</th>
           </tr>
       </thead>
       <tbody>
           <!-- Bind userList -->
           <tr *ngFor="let element of ProjectList">
-              <td>{{ element?.Id }}</td>
+              <!-- <td>{{ element?.Id }}</td> -->
               <td>{{ element?.Name }}</td>
               <td>{{ element?.Description }}</td>
               <td>{{ element?.DueDate }}</td>

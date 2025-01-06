@@ -1,46 +1,107 @@
-<div class="layout">
+<div class="layout" style="display: flex; height: 100vh;">
   <!-- Sidebar -->
-  <aside class="sidebar">
-    <div class="logo">Logo</div>
-    <div class="menu-section">
-      <div class="menu-header" (click)="toggleUserMenu()">
-        <span>&#128100; User</span>
-        <span [class]="userMenuOpen ? 'arrow-up' : 'arrow-down'"></span>
-      </div>
-      <ul *ngIf="userMenuOpen" class="submenu">
-        <li><a routerLink="/user/user-list" routerLinkActive="active">User List</a></li>
-        <li><a routerLink="/user/user-create" routerLinkActive="active">Add User</a></li>
-      </ul>
+  <aside
+    class="sidebar"
+    style="width: 250px; background-color: #123456; color: white; display: flex; flex-direction: column; padding: 10px 0;"
+  >
+    <div class="logo" style="margin: 10px auto; font-size: 18px; font-weight: bold; text-align: center;">
+      Logo
+    </div>
 
-    </div> 
-    <!-- Project Section -->
-    <div class="menu-section">
-      <div class="menu-header" (click)="toggleProjectMenu()">
-        <span>&#128736; Project</span>
-        <span [class]="projectMenuOpen ? 'arrow-up' : 'arrow-down'"></span>
+    <!-- User Menu -->
+    <div class="menu-section" style="margin-top: 20px;">
+      <div
+        class="menu-header"
+        style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; font-size: 14px;"
+        data-bs-toggle="collapse"
+        data-bs-target="#userMenu"
+        aria-expanded="false"
+        aria-controls="userMenu"
+      >
+        <span>&#x2022; User</span>
+        <span class="arrow-indicator">&#9660;</span>
       </div>
-      <ul *ngIf="projectMenuOpen" class="submenu">
-        <li><a routerLink="/project-module/project-create" routerLinkActive="active">Create Project</a></li>
-        <li><a routerLink="/project-module/Project-list" routerLinkActive="active">Project List</a></li>
+      <ul
+        id="userMenu"
+        class="submenu collapse"
+        style="list-style: none; margin: 0; padding: 5px 0 0 20px;"
+      >
+        <li style="margin: 5px 0;">
+          <a
+            class="nav-link"
+            href="/user/user-list"
+            style="color: white; text-decoration: none; font-size: 13px; cursor: pointer;"
+          >
+            User List
+          </a>
+        </li>
+        <li style="margin: 5px 0;">
+          <a
+            class="nav-link"
+            href="/user/user-create"
+            style="color: white; text-decoration: none; font-size: 13px; cursor: pointer;"
+          >
+            Add User
+          </a>
+        </li>
       </ul>
     </div>
 
-
-
-
-
-
+    <!-- Project Menu -->
+    <div class="menu-section" style="margin-top: 20px;">
+      <div
+        class="menu-header"
+        style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; font-size: 14px;"
+        data-bs-toggle="collapse"
+        data-bs-target="#projectMenu"
+        aria-expanded="false"
+        aria-controls="projectMenu"
+      >
+        <span>&#x2022; Project</span>
+        <span class="arrow-indicator">&#9660;</span>
+      </div>
+      <ul
+        id="projectMenu"
+        class="submenu collapse"
+        style="list-style: none; margin: 0; padding: 5px 0 0 20px;"
+      >
+        <li style="margin: 5px 0;">
+          <a
+            class="nav-link"
+            href="/project-module/project-create"
+            style="color: white; text-decoration: none; font-size: 13px; cursor: pointer;"
+          >
+            Create Project
+          </a>
+        </li>
+        <li style="margin: 5px 0;">
+          <a
+            class="nav-link"
+            href="/project-module/Project-list"
+            style="color: white; text-decoration: none; font-size: 13px; cursor: pointer;"
+          >
+            Project List
+          </a>
+        </li>
+      </ul>
+    </div>
   </aside>
 
-  <!-- Main content -->
-  <main class="main-content">
-    <header class="navbar">
-      <div class="title">TMS</div>
-      <div class="profile">
+  <!-- Main Content -->
+  <main class="main-content" style="flex: 1; display: flex; flex-direction: column;">
+    <header
+      class="navbar"
+      style="display: flex; justify-content: space-between; align-items: center; background-color: #345e78; color: white; padding: 0 20px; height: 60px;"
+    >
+      <div class="title" style="font-size: 20px; font-weight: bold;">TMS</div>
+      <div class="profile" style="display: flex; align-items: center;">
         <span>Profile</span>
       </div>
     </header>
-    <div class="content">
+    <div
+      class="content"
+      style="flex: 1; padding: 20px; background-color: #f4f4f4; overflow-y: auto;"
+    >
       <router-outlet></router-outlet>
     </div>
   </main>

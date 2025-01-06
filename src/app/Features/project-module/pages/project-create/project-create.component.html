@@ -1,84 +1,91 @@
-<div class="container">
-  <!-- User List Button -->
-  <div class="d-flex justify-content-end my-3">
-    <button class="btn btn-primary" routerLink="/project-module/Project-list">Project List</button>
+<div class="container-fluid">
+  <!-- Header Section -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold text-dark">
+      {{ isEdit ? 'Edit Project Details' : 'Create New Project' }}
+    </h3>
+    <button class="btn btn-outline-primary d-flex align-items-center gap-2 ms-auto" routerLink="/project-module/Project-list">
+      <i class="bi bi-card-list"></i>
+      View All Projects
+    </button>
   </div>
 
   <!-- Form Container -->
-  <div class="d-flex justify-content-center align-items-center vh-80">
-    <div class="card shadow-sm p-4" style="width: 400px;">
-      <h4 class="text-center mb-4">{{ isEdit ? 'Edit Project Details' : 'Add Project' }}</h4>
-
+  <div class="row">
+    <div class="col-12">
+      <!-- <h4 class="mb-4 fw-semibold text-dark">
+        {{ isEdit ? 'Edit Project Details' : 'Create New Project' }}
+      </h4> -->
       <form [formGroup]="projectForm" (ngSubmit)="save()">
-
-        <!-- Name Field -->
-        <div class="mb-3">
-          <label for="Name" class="form-label">Name<span class="text-danger">*</span></label>
+        <!-- Project Name -->
+        <div class="mb-4">
+          <label for="Name" class="form-label fw-semibold">Project Name <span class="text-danger">*</span></label>
           <input
             id="Name"
             type="text"
             class="form-control"
-            placeholder="Name"
+            placeholder="Enter project name"
             formControlName="Name"
           />
-          <div
+          <small
             *ngIf="projectForm.get('Name')?.invalid && projectForm.get('Name')?.touched"
             class="text-danger"
           >
-            Name is required.
-          </div>
+            Project name is required.
+          </small>
         </div>
 
-        <!-- Email Field -->
-        <div class="mb-3">
-          <label for="Description" class="form-label">Description<span class="text-danger">*</span></label>
-          <input
+        <!-- Description -->
+        <div class="mb-4">
+          <label for="Description" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+          <textarea
             id="Description"
-            type="text"
             class="form-control"
-            placeholder="Description"
+            rows="5"
+            placeholder="Provide a detailed description of the project"
             formControlName="Description"
-          />
-          <div
+            style="width: 100%;"
+          ></textarea>
+          <small
             *ngIf="projectForm.get('Description')?.invalid && projectForm.get('Description')?.touched"
             class="text-danger"
           >
-          Description is required.
-          </div>
+            Description is required.
+          </small>
         </div>
 
-        <!-- Due Date Field -->
-        <div class="mb-3">
-          <label for="DueDate" class="form-label">Due Date<span class="text-danger">*</span></label>
+        <!-- Due Date -->
+        <div class="mb-4">
+          <label for="DueDate" class="form-label fw-semibold">Due Date <span class="text-danger">*</span></label>
           <input
             id="DueDate"
             type="datetime"
             class="form-control"
-            placeholder="Due Date"
             formControlName="DueDate"
+            placeholder="yyyy-mm-dd"
           />
-          <div
+          <small
             *ngIf="projectForm.get('DueDate')?.invalid && projectForm.get('DueDate')?.touched"
             class="text-danger"
           >
-            Due Date is required.
-          </div>
+            Due date is required.
+          </small>
         </div>
 
-        <!-- Submit Button -->
-        <div class="d-grid">
+        <!-- Buttons -->
+        <div class="d-flex justify-content-end gap-3">
+          <button class="btn btn-light" type="button" routerLink="/project-module/Project-list">
+            Cancel
+          </button>
           <button
-            class="btn btn-success"
+            class="btn btn-primary"
             [disabled]="projectForm.invalid"
             type="submit"
           >
-            {{ isEdit ? 'Update' : 'Add' }}
+            {{ isEdit ? 'Update Project' : 'Create Project' }}
           </button>
         </div>
       </form>
     </div>
   </div>
 </div>
-
-
-

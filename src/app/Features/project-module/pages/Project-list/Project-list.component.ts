@@ -13,7 +13,7 @@ export class ProjectListComponent implements OnInit {
     ProjectList: IProject[] = [];
 
   constructor(private projectService: ProjectService) { }
-  displayedColumns: string[] = ['Id', 'Name', 'Description','DueDate','Action'];
+  displayedColumns: string[] = ['Name', 'Description','DueDate','Action'];
 
   ngOnInit():void {
     this.projectService.getAllProjects().subscribe({
