@@ -1,0 +1,105 @@
+<button class="btn btn-primary float-end" routerLink="/tasks/list">
+  <i class="bi bi-plus"></i> Task List
+</button>
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h2>Create Task</h2>
+            
+            <p class="text-muted mb-0">Manage your tasks efficiently by filling out the form below.</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+              <div class="mb-3">
+                <label for="title" class="form-label">Task Title *</label>
+                <input 
+                  id="title"
+                  type="text"
+                  class="form-control"
+                  formControlName="title"
+                  placeholder="Enter task title"
+                >
+              </div>
+  
+              <div class="mb-3">
+                <label for="description" class="form-label">Task Description</label>
+                <textarea
+                  id="description"
+                  class="form-control"
+                  formControlName="description"
+                  placeholder="Enter detailed description"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div>
+                <label for="project">Project:</label>
+                <select id="project" formControlName="projectId">
+                  <option value="">Select Project</option>
+                  <option *ngFor="let project of projects" [value]="project.id">
+                    {{project.name}}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label for="status">Status:</label>
+                <select id="status" formControlName="statusId">
+                  <option value="">Select Status</option>
+                  <option *ngFor="let status of statuses" [value]="status.id">
+                    {{status.name}}
+                  </option>
+                </select>
+              </div>
+
+              <div class="mb-3">
+                <label for="priority" class="form-label">Priority *</label>
+                <select id="priority" class="form-select" formControlName="priority">
+                  <option value="">Select Priority</option>
+                  <option *ngFor="let priority of priorities" [value]="priority">
+                    {{priority}}
+                  </option>
+                </select>
+              </div>
+  
+              <div class="mb-3">
+                <label for="status" class="form-label">Status *</label>
+                <select id="status" class="form-select" formControlName="status">
+                  <option value="">Select Status</option>
+                  <option *ngFor="let status of statuses" [value]="status">
+                    {{status}}
+                  </option>
+                </select>
+              </div>
+  
+              <div class="mb-3">
+                <label for="dueDate" class="form-label">Due Date *</label>
+                <input
+                  id="dueDate"
+                  type="date"
+                  class="form-control"
+                  formControlName="dueDate"
+                >
+              </div>
+  
+              <div class="mb-3">
+                <label class="form-label">Assign Users</label>
+                <select multiple class="form-select" formControlName="assignedUserIds" size="4">
+                  <option *ngFor="let user of users" [value]="user.id">
+                    {{user.name}}
+                  </option>
+                </select>
+              </div>
+  
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary" routerLink="/tasks">Cancel</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">Save Task</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

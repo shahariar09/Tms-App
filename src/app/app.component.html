@@ -12,6 +12,15 @@
         <li><a routerLink="/user/user-create" routerLinkActive="active">Add User</a></li>
       </ul>
 
+      <div class="menu-header" (click)="toggleTaskMenu()">
+        <span>&#128221; Task</span>
+        <span [class]="taskMenuOpen ? 'arrow-up' : 'arrow-down'"></span>
+      </div>
+      <ul *ngIf="taskMenuOpen" class="submenu">
+        <li><a routerLink="/tasks" routerLinkActive="active">Task List</a></li>
+        <li><a routerLink="/tasks/create" routerLinkActive="active">Add Task</a></li>
+        </ul>
+
     </div> 
   </aside>
 
