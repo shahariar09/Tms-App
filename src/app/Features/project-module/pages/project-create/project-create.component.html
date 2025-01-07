@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <!-- Header Section -->
-  <header class="navbar" style="background-color: #345e78; color: white; padding: 0 20px; height: 60px; display: flex; align-items: center;">
-    <h3 class="fw-bold mb-0">
+  <header class="navbar" style="background-color: #345e78; color: white; padding: 17px 20px; display: flex; align-items: center;">
+    <h5 class="fw-bold mb-0">
       {{ isEdit ? 'Edit Project Details' : 'Create New Project' }}
-    </h3>
+    </h5>
   </header>
 
   <!-- Form Container -->
-  <div class="card shadow-sm p-4">
+  <div class="card shadow-sm p-4 border-0">
     <form [formGroup]="projectForm" (ngSubmit)="save()">
       <!-- Project Name -->
       <div class="mb-4">
@@ -50,7 +50,7 @@
         <label for="DueDate" class="form-label fw-semibold">Due Date <span class="text-danger">*</span></label>
         <input
           id="DueDate"
-          type="datetime"
+          type="date"
           class="form-control"
           formControlName="DueDate"
           placeholder="yyyy-mm-dd"
@@ -73,7 +73,7 @@
           [disabled]="projectForm.invalid"
           type="submit"
         >
-          {{ isEdit ? 'Update Project' : 'Create Project' }}
+          {{ isEdit ? 'Update' : 'Save' }}
         </button>
       </div>
     </form>

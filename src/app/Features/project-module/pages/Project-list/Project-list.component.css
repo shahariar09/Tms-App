@@ -1,0 +1,10 @@
+.search-icon{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 13px;
+    top: 11px;
+}
+.search-section input{
+    padding-left: 38px;
+}

@@ -31,12 +31,11 @@ export class ProjectCreateComponent {
         this.projectService.getProjectById(this.projectId).subscribe( 
           (result) => {
             console.log(result);
-    
             this.projectForm.patchValue({
               Id: result.Id,
               Name: result.Name,
               Description: result.Description,
-              DueDate: result.DueDate,
+              DueDate:result.DueDate.split('T')[0]
             });
           },
           
