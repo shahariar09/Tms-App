@@ -1,46 +1,47 @@
 <div class="container">
-  <!-- Add User Button -->
-  <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="mb-0">Project List</h4>
-      <button class="btn btn-primary btn-sm d-flex justify-content-center align-items-center" style="height: 35px; line-height: 1; padding: 0 8px; font-size: 0.8rem;" routerLink="/project-module/project-create">Add Project</button>
-  </div>
-
-  <!-- Bootstrap Table -->
-  <table class="table table-striped table-hover">
+    <!-- Add Project Button -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <button class="btn btn-outline-primary d-flex align-items-center gap-2 ms-auto" routerLink="/project-module/project-create">
+          <i class="bi bi-card-list"></i>
+          Create Project
+        </button>
+      </div>
+      
+  
+    <!-- Header Section -->
+    <header class="navbar" style="display: flex; justify-content: space-between; align-items: center; background-color: #345e78; color: white; padding: 0 20px; height: 60px;">
+      <div class="title" style="font-size: 20px; font-weight: bold;">Project List</div>
+    </header>
+  
+    <!-- Bootstrap Table -->
+    <table class="table table-striped table-hover">
       <thead class="table-dark">
-          <tr>
-              <!-- <th scope="col" style="width: 10%;">Id</th> -->
-              <th scope="col" style="width: 20%;">Project Name</th>
-              <th scope="col" style="width: 30%;">Description</th>
-              <th scope="col" style="width: 30%;">Due Date</th>
-              <th scope="col" style="width: 20%;">Action</th>
-          </tr>
+        <tr>
+          <th scope="col" style="width: 20%;">Project Name</th>
+          <th scope="col" style="width: 30%;">Description</th>
+          <th scope="col" style="width: 30%;">Due Date</th>
+          <th scope="col" style="width: 20%;">Action</th>
+        </tr>
       </thead>
       <tbody>
-          <!-- Bind userList -->
-          <tr *ngFor="let element of ProjectList">
-              <!-- <td>{{ element?.Id }}</td> -->
-              <td>{{ element?.Name }}</td>
-              <td>{{ element?.Description }}</td>
-              <td>{{ element?.DueDate }}</td>
-              <td>
-                  <div class="d-flex gap-2" style="margin-left: -20px;">
-                   <button class="btn btn-primary btn-sm d-flex justify-content-center align-items-center" style="height: 28px; line-height: 1; padding: 0 8px; font-size: 0.8rem;" (click)="edit(element?.Id)">Edit</button>
-                   <button class="btn btn-danger btn-sm d-flex justify-content-center align-items-center" style="height: 28px; line-height: 1; padding: 0 8px; font-size: 0.8rem;" (click)="delete(element?.Id)">Delete</button>
-               </div>
-              </td>
-          </tr>
+        <!-- Bind ProjectList -->
+        <tr *ngFor="let element of ProjectList">
+          <td>{{ element?.Name }}</td>
+          <td>{{ element?.Description }}</td>
+          <td>{{ element?.DueDate }}</td>
+          <td>
+            <div class="d-flex gap-2">
+              <button class="btn btn-primary btn-sm d-flex justify-content-center align-items-center" style="height: 28px; line-height: 1; padding: 0 8px; font-size: 0.8rem;" (click)="edit(element?.Id)">Edit</button>
+              <button class="btn btn-danger btn-sm d-flex justify-content-center align-items-center" style="height: 28px; line-height: 1; padding: 0 8px; font-size: 0.8rem;" (click)="delete(element?.Id)">Delete</button>
+            </div>
+          </td>
+        </tr>
       </tbody>
-  </table>
-
-  <!-- No Data Message -->
-  <div *ngIf="!ProjectList?.length" class="alert alert-info text-center">
+    </table>
+  
+    <!-- No Data Message -->
+    <div *ngIf="!ProjectList?.length" class="alert alert-info text-center">
       No Projects Available.
+    </div>
   </div>
-</div>
-
-
-
-
-
-
+  

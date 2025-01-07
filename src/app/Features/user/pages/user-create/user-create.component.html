@@ -1,18 +1,26 @@
 <div class="container">
   <!-- User List Button -->
   <div class="d-flex justify-content-end my-3">
-    <button class="btn btn-primary" routerLink="/user/user-list">User List</button>
+    <!-- <button class="btn btn-outline-primary d-flex align-items-center gap-2" routerLink="/user-list">
+      <i class="bi bi-card-list"></i>
+      View All Users
+    </button> -->
   </div>
 
-  <!-- Form Container -->
-  <div class="d-flex justify-content-center align-items-center vh-80">
-    <div class="card shadow-sm p-4" style="width: 400px;">
-      <h4 class="text-center mb-4">{{ isEdit ? 'Edit User Details' : 'Add User' }}</h4>
+  <!-- Header Section -->
+  <header class="navbar" style="background-color: #345e78; color: white; padding: 0 20px; height: 60px; display: flex; align-items: center;">
+    <h3 class="fw-bold mb-0">
+      {{ isEdit ? 'Edit User Details' : 'Add User' }}
+    </h3>
+  </header>
 
+  <!-- Form Container -->
+  
+    <div class="card shadow-sm p-4">
       <form [formGroup]="userForm" (ngSubmit)="save()">
         <!-- Name Field -->
         <div class="mb-3">
-          <label for="Name" class="form-label">Name<span class="text-danger">*</span></label>
+          <label for="Name" class="form-label fw-semibold">Name <span class="text-danger">*</span></label>
           <input
             id="Name"
             type="text"
@@ -20,17 +28,17 @@
             placeholder="Name"
             formControlName="Name"
           />
-          <div
+          <small
             *ngIf="userForm.get('Name')?.invalid && userForm.get('Name')?.touched"
             class="text-danger"
           >
             Name is required.
-          </div>
+          </small>
         </div>
 
         <!-- Email Field -->
         <div class="mb-3">
-          <label for="Email" class="form-label">Email<span class="text-danger">*</span></label>
+          <label for="Email" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
           <input
             id="Email"
             type="email"
@@ -38,17 +46,17 @@
             placeholder="Email"
             formControlName="Email"
           />
-          <div
+          <small
             *ngIf="userForm.get('Email')?.invalid && userForm.get('Email')?.touched"
             class="text-danger"
           >
             Email is required and must be a valid email address.
-          </div>
+          </small>
         </div>
 
         <!-- Role Name Field -->
         <div class="mb-3">
-          <label for="RoleName" class="form-label">Role Name<span class="text-danger">*</span></label>
+          <label for="RoleName" class="form-label fw-semibold">Role Name <span class="text-danger">*</span></label>
           <select
             id="RoleName"
             class="form-select"
@@ -59,16 +67,19 @@
             <option value="2">User</option>
             <option value="3">Manager</option>
           </select>
-          <div
+          <small
             *ngIf="userForm.get('RoleId')?.invalid && userForm.get('RoleId')?.touched"
             class="text-danger"
           >
             Role Name is required.
-          </div>
+          </small>
         </div>
 
-        <!-- Submit Button -->
-        <div class="d-grid">
+        <!-- Buttons -->
+        <div class="d-flex justify-content-end gap-3">
+          <button class="btn btn-light" type="button" routerLink="/user/user-list">
+            Cancel
+          </button>
           <button
             class="btn btn-success"
             [disabled]="userForm.invalid"
@@ -79,7 +90,5 @@
         </div>
       </form>
     </div>
-  </div>
+  
 </div>
-
-

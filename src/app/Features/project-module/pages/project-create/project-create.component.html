@@ -1,91 +1,81 @@
 <div class="container-fluid">
   <!-- Header Section -->
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h3 class="fw-bold text-dark">
+  <header class="navbar" style="background-color: #345e78; color: white; padding: 0 20px; height: 60px; display: flex; align-items: center;">
+    <h3 class="fw-bold mb-0">
       {{ isEdit ? 'Edit Project Details' : 'Create New Project' }}
     </h3>
-    <button class="btn btn-outline-primary d-flex align-items-center gap-2 ms-auto" routerLink="/project-module/Project-list">
-      <i class="bi bi-card-list"></i>
-      View All Projects
-    </button>
-  </div>
+  </header>
 
   <!-- Form Container -->
-  <div class="row">
-    <div class="col-12">
-      <!-- <h4 class="mb-4 fw-semibold text-dark">
-        {{ isEdit ? 'Edit Project Details' : 'Create New Project' }}
-      </h4> -->
-      <form [formGroup]="projectForm" (ngSubmit)="save()">
-        <!-- Project Name -->
-        <div class="mb-4">
-          <label for="Name" class="form-label fw-semibold">Project Name <span class="text-danger">*</span></label>
-          <input
-            id="Name"
-            type="text"
-            class="form-control"
-            placeholder="Enter project name"
-            formControlName="Name"
-          />
-          <small
-            *ngIf="projectForm.get('Name')?.invalid && projectForm.get('Name')?.touched"
-            class="text-danger"
-          >
-            Project name is required.
-          </small>
-        </div>
+  <div class="card shadow-sm p-4">
+    <form [formGroup]="projectForm" (ngSubmit)="save()">
+      <!-- Project Name -->
+      <div class="mb-4">
+        <label for="Name" class="form-label fw-semibold">Project Name <span class="text-danger">*</span></label>
+        <input
+          id="Name"
+          type="text"
+          class="form-control"
+          placeholder="Enter project name"
+          formControlName="Name"
+        />
+        <small
+          *ngIf="projectForm.get('Name')?.invalid && projectForm.get('Name')?.touched"
+          class="text-danger"
+        >
+          Project name is required.
+        </small>
+      </div>
 
-        <!-- Description -->
-        <div class="mb-4">
-          <label for="Description" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
-          <textarea
-            id="Description"
-            class="form-control"
-            rows="5"
-            placeholder="Provide a detailed description of the project"
-            formControlName="Description"
-            style="width: 100%;"
-          ></textarea>
-          <small
-            *ngIf="projectForm.get('Description')?.invalid && projectForm.get('Description')?.touched"
-            class="text-danger"
-          >
-            Description is required.
-          </small>
-        </div>
+      <!-- Description -->
+      <div class="mb-4">
+        <label for="Description" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+        <textarea
+          id="Description"
+          class="form-control"
+          rows="5"
+          placeholder="Provide a detailed description of the project"
+          formControlName="Description"
+        ></textarea>
+        <small
+          *ngIf="projectForm.get('Description')?.invalid && projectForm.get('Description')?.touched"
+          class="text-danger"
+        >
+          Description is required.
+        </small>
+      </div>
 
-        <!-- Due Date -->
-        <div class="mb-4">
-          <label for="DueDate" class="form-label fw-semibold">Due Date <span class="text-danger">*</span></label>
-          <input
-            id="DueDate"
-            type="datetime"
-            class="form-control"
-            formControlName="DueDate"
-            placeholder="yyyy-mm-dd"
-          />
-          <small
-            *ngIf="projectForm.get('DueDate')?.invalid && projectForm.get('DueDate')?.touched"
-            class="text-danger"
-          >
-            Due date is required.
-          </small>
-        </div>
+      <!-- Due Date -->
+      <div class="mb-4">
+        <label for="DueDate" class="form-label fw-semibold">Due Date <span class="text-danger">*</span></label>
+        <input
+          id="DueDate"
+          type="datetime"
+          class="form-control"
+          formControlName="DueDate"
+          placeholder="yyyy-mm-dd"
+        />
+        <small
+          *ngIf="projectForm.get('DueDate')?.invalid && projectForm.get('DueDate')?.touched"
+          class="text-danger"
+        >
+          Due date is required.
+        </small>
+      </div>
 
-        <!-- Buttons -->
-        <div class="d-flex justify-content-end gap-3">
-          <button class="btn btn-light" type="button" routerLink="/project-module/Project-list">
-            Cancel
-          </button>
-          <button
-            class="btn btn-primary"
-            [disabled]="projectForm.invalid"
-            type="submit"
-          >
-            {{ isEdit ? 'Update Project' : 'Create Project' }}
-          </button>
-        </div>
-      </form>
-    </div>
+      <!-- Buttons -->
+      <div class="d-flex justify-content-end gap-3">
+        <button class="btn btn-light" type="button" routerLink="/project-module/Project-list">
+          Cancel
+        </button>
+        <button
+          class="btn btn-primary"
+          [disabled]="projectForm.invalid"
+          type="submit"
+        >
+          {{ isEdit ? 'Update Project' : 'Create Project' }}
+        </button>
+      </div>
+    </form>
   </div>
 </div>
