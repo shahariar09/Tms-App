@@ -4,7 +4,7 @@ import { IProject } from '../../interfaces/project';
 import { ProjectService } from '../../services/project.service';
 import { IUser } from '../../../user/interfaces/user';
 import { HttpService } from '../../../user/services/user.service';
-import { firstValueFrom } from 'rxjs';
+//import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-project-detail',
@@ -75,30 +75,6 @@ export class ProjectDetailComponent implements OnInit {
     console.log('Currently assigned users:', this.assignedUsers);
   }
   
- 
-  
-
-  // assignUsers(): void {
-  //   if (!this.project?.Id || this.assignedUsers.length === 0) {
-  //     alert('Please select at least one user.');
-  //     return;
-  //   }
-  
-  //   this.isSubmitting = true;
-  
-  //   this.projectService.assignMultipleUsersToProject(this.project.Id, this.assignedUsers).subscribe({
-  //     next: (response) => {
-  //       console.log('Users successfully assigned:', response); 
-  //       alert('Users successfully assigned to the project!');
-  //       this.isSubmitting = false;
-  //     },
-  //     error: (err) => {
-  //       console.error('Error assigning users:', err);
-  //       alert('An error occurred while assigning users. Please try again later.');
-  //       this.isSubmitting = false;
-  //     }
-  //   });
-  // }
 
   assignUsers(): void {
     if (!this.project?.Id || this.assignedUsers.length === 0) {
