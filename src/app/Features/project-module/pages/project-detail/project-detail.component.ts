@@ -46,7 +46,9 @@ export class ProjectDetailComponent implements OnInit {
   loadUsers(): void {
     this.userService.getAllUsers().subscribe({
       next: (data: IUser[]) => {
-        this.users = data.filter((user) => user.RoleName === 'User'); // Only users with RoleName "User"
+        debugger
+        // this.users = data.filter((user) => user.RoleName === 'User'); // Only users with RoleName "User"
+        this.users = data; // Only users with RoleName "User"
       },
       error: (err) => {
         console.error('Error fetching users:', err);

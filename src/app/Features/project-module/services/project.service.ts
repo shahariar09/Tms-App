@@ -41,10 +41,14 @@ constructor(private http: HttpClient) { }
   }
 
   assignMultipleUsersToProject(ProjectId: number, UserIds: number[]): Observable<void> {
+    var assignMultipleUsersToProjectDto  = {
+      UserIds: UserIds,
+       ProjectId:ProjectId
+    }
     
     return this.http.post<void>(
-      `${this.apiUrl}/api/Projects/assign-users`,
-      { ProjectId, UserIds }
+      `${this.apiUrl}/api/Projects/assign-user`, assignMultipleUsersToProjectDto
+ 
     );
   }
 
