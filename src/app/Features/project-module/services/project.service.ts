@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IProject } from '../interfaces/project';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,8 @@ constructor(private http: HttpClient) { }
     return this.http.post(this.apiUrl+"/api/Projects",project);
 
   }
+ 
+  
   getProjectById(ProjectId: number): Observable<any> {
     //return this.http.get<any>(`${this.apiUrl}/api/User/GetUserById/${userId}`);
     return this.http.get<any[]>(this.apiUrl + '/api/Projects/'+ProjectId);
@@ -30,7 +33,26 @@ constructor(private http: HttpClient) { }
     return this.http.delete(this.apiUrl +'/api/Projects/'+ ProjectId);
   }
 
+  assignUserToProject(projectId: number, userId: number): Observable<void> {
+    return this.http.post<void>(
+      `${this.apiUrl}/api/Projects/assign-user?userId=${userId}&projectId=${projectId}`,
+      {}
+    );
+  }
 
+  assignMultipleUsersToProject(ProjectId: number, UserIds: number[]): Observable<void> {
+    
+    return this.http.post<void>(
+      `${this.apiUrl}/api/Projects/assign-users`,
+      { ProjectId, UserIds }
+    );
+  }
 
-
+  
+  
+  
+  
 }
+
+
+

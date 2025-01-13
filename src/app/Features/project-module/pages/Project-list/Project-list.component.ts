@@ -52,4 +52,16 @@ delete(Id: number | undefined): void {
   }
 }
 
+viewDetail(projectId: number | undefined): void {
+  if (projectId == null) {
+    console.error("Invalid projectId provided for viewDetail:", projectId);
+    return; // Avoid navigation if projectId is invalid
+  }
+  //this.router.navigate(['/project-module/project-detail', projectId]);
+  this.router.navigateByUrl(`project-module/project-detail/${projectId}`);
+}
+
+
+
+
 }

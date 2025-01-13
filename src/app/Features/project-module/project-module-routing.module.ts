@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProjectListComponent } from './pages/Project-list/Project-list.component';
 import { ProjectCreateComponent } from './pages/project-create/project-create.component';
+import { ProjectAssignComponent } from './pages/project-assign/project-assign.component';
+import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
+
 
 const routes: Routes = [
   {
@@ -15,7 +18,22 @@ const routes: Routes = [
   {
     path: 'project-create/:Id',
   component:ProjectCreateComponent
-  }
+  },
+  {
+    path: 'project-assign',
+    component:ProjectAssignComponent
+  },
+  {
+    path: 'projecct-detail',
+    component: ProjectDetailComponent 
+  },
+  { 
+    path: 'project-detail/:Id',
+    component: ProjectDetailComponent 
+  },
+
+  
+ 
   
 
 ];

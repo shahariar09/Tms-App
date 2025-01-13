@@ -4,15 +4,18 @@ import { CommonModule } from '@angular/common';
 import { ProjectModuleRoutingModule } from './project-module-routing.module';
 import { ProjectCreateComponent } from './pages/project-create/project-create.component';
 import { ProjectListComponent } from './pages/Project-list/Project-list.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ProjectAssignComponent } from './pages/project-assign/project-assign.component';
+import { ProjectDetailComponent } from './pages/project-detail/project-detail.component';
 
 
 @NgModule({
-  declarations: [ProjectCreateComponent,ProjectListComponent],
+  declarations: [ProjectCreateComponent,ProjectListComponent,ProjectDetailComponent,ProjectAssignComponent],
   imports: [
     CommonModule,
     ProjectModuleRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ProjectModuleModule { }

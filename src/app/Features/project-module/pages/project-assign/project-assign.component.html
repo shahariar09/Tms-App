@@ -1,0 +1,56 @@
+<div class="container">
+  <h2>Assign Users to Projects</h2>
+
+  <!-- Project Selection -->
+  <div class="form-group">
+    <label for="project-select"><strong>Select a Project:</strong></label>
+    <select
+      id="project-select"
+      class="form-control"
+      (change)="selectProject($event)"
+    >
+      <option value="" disabled selected>Select a project</option>
+      <option *ngFor="let project of projects" [value]="project.Id">
+        {{ project.Name }}
+      </option>
+    </select>
+  </div>
+
+  <!-- User Selection -->
+  <div>
+    <strong>Choose User:</strong>
+  </div>
+  <div class="user-list">
+    <div *ngIf="users && users.length > 0">
+      <div *ngFor="let user of users" class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [id]="'user-' + user.Id"
+          [value]="user.Id"
+          (change)="toggleUserSelection(user.Id)"
+        />
+        <label class="form-check-label" [for]="'user-' + user.Id">
+          {{ user.Name }} ({{ user.Email }})
+        </label>
+      </div>
+    </div>
+    <div *ngIf="!users || users.length === 0">
+      <p>Loading users...</p>
+    </div>
+    
+
+  <!-- Assign Button -->
+  <button
+    class="btn btn-primary mt-3"
+    (click)="assignUsers()"
+    [disabled]="isSubmitting"
+  >
+    {{ isSubmitting ? 'Assigning...' : 'Assign Users' }}
+  </button>
+
+  <!-- Info Message -->
+  <div *ngIf="!selectedProjectId" class="alert alert-info mt-3">
+    <p>Please select a project to assign users.</p>
+  </div>
+</div>

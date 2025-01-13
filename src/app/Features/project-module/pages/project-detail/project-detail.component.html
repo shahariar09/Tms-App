@@ -1,0 +1,81 @@
+<div class="container mt-4">
+  <h2>Project Details</h2>
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="activeTab === 'info'"
+        (click)="setActiveTab('info')"
+    
+      >
+        Project Info
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="nav-link"
+        [class.active]="activeTab === 'assign'"
+        (click)="setActiveTab('assign')"
+        
+      >
+        Assign User
+      </a>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content mt-4">
+    <div [ngClass]="{'tab-pane': true, 'fade': true, 'show active': activeTab === 'info'}">
+      <!-- Project Info Tab -->
+      <h4>Project Information</h4>
+      <p><strong>Name:</strong> {{ project?.Name }}</p>
+      <p><strong>Description:</strong> {{ project?.Description }}</p>
+      <p><strong>Due Date:</strong> {{ project?.DueDate | date: 'dd-MMM-YYYY' }}</p>
+    </div>
+
+    <div [ngClass]="{'tab-pane': true, 'fade': true, 'show active': activeTab === 'assign'}">
+      <!-- Assign User Tab -->
+      <h4>Assign Users to Project</h4>
+
+      <!-- User Selection -->
+      <div class="mb-3">
+        <strong>Select Users:</strong>
+        <div class="user-list mt-2">
+          <div *ngIf="users && users.length > 0">
+            <div *ngFor="let user of users" class="form-check">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [id]="'user-' + user.Id"
+                [value]="user.Id"
+                (change)="toggleUserSelection(user.Id)"
+              />
+              <label class="form-check-label" [for]="'user-' + user.Id">
+                {{ user.Name }} ({{ user.Email }})
+              </label>
+            </div>
+          </div>
+          <div *ngIf="!users || users.length === 0">
+            <p class="text-muted">Loading users...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assign Button -->
+      <button
+        class="btn btn-primary"
+        (click)="assignUsers()"
+        [disabled]="isSubmitting"
+      >
+        {{ isSubmitting ? 'Assigning...' : 'Assign Users' }}
+      </button>
+
+      <!-- Error Message -->
+      <div *ngIf="!project?.Id" class="alert alert-warning mt-3">
+        <p>Invalid project. Unable to assign users.</p>
+      </div>
+    </div>
+  </div>
+</div>
