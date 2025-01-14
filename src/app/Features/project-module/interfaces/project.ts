@@ -6,5 +6,6 @@ export interface IProject {
     Description: string;
     DueDate: Date;
     AssignedUsers?: IUser[];
+    ProjectUsers?: { UserId: number; UserName: string }[];
     
   }

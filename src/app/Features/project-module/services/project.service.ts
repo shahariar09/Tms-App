@@ -52,6 +52,13 @@ constructor(private http: HttpClient) { }
     );
   }
 
+  unassignUserFromProject(projectId: number, userId: number): Observable<void> {
+    const url = `https://localhost:7059/api/Projects/unassign-user?projectId=${projectId}&userId=${userId}`;
+    return this.http.delete<void>(url);
+  }
+  
+  
+
   
   
   
