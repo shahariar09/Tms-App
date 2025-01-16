@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'user/user-list', pathMatch: 'full' },
+  
   {
     path: 'user',
     loadChildren: () =>
