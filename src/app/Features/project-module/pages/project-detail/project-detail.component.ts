@@ -16,6 +16,7 @@ export class ProjectDetailComponent implements OnInit {
   assignedUsers: number[] = []; // IDs of selected users
   activeTab: string = 'info'; // Default active tab
   isSubmitting = false;
+  filteredUsers: any[] = []; // Users displayed after filtering
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class ProjectDetailComponent implements OnInit {
     const projectId = Number(this.route.snapshot.paramMap.get('Id'));
     this.loadProjectDetails(projectId);
     this.loadUsers();
+    this.filteredUsers = [...this.users];
   }
 
   loadProjectDetails(projectId: number): void {
@@ -127,5 +129,7 @@ export class ProjectDetailComponent implements OnInit {
       }
     });
   }
+
+  
   
 }

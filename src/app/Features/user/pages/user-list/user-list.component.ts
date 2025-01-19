@@ -70,5 +70,14 @@ delete(Id: number | undefined): void {
   }
 }
 
+onSearch(event: Event): void {
+  const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
+  this.userList = this.userList.filter(user =>
+    user.Name.toLowerCase().includes(searchTerm) ||
+    user.Email.toLowerCase().includes(searchTerm) ||
+    user.RoleName.toLowerCase().includes(searchTerm)
+  );
+}
+
 
 }

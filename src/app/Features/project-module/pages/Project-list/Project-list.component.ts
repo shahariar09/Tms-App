@@ -61,6 +61,17 @@ viewDetail(projectId: number | undefined): void {
   this.router.navigateByUrl(`project-module/project-detail/${projectId}`);
 }
 
+onSearch(event: Event): void {
+  const searchTerm = (event.target as HTMLInputElement).value.toLowerCase();
+
+  // Filter projects by name or description
+  this.ProjectList = this.ProjectList.filter(
+    (project) =>
+      project.Name.toLowerCase().includes(searchTerm) 
+      // project.Description.toLowerCase().includes(searchTerm)
+  );
+}
+
 
 
 
