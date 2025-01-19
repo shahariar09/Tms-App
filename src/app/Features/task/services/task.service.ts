@@ -9,7 +9,7 @@ import { ITask } from '../interface/task';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = 'https://localhost:7059/api/TaskItems'; // Updated to match controller route
+  private apiUrl = 'https://localhost:7059/api/TaskItems'; 
 
   constructor(private http: HttpClient) { }
 
@@ -54,10 +54,18 @@ export class TaskService {
       })
     );
   }
-  updateTask(id: number, task: ITask): Observable<any> {
+  
+  updateTask(id: number, task: Partial<ITask>): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, task).pipe(
       tap(response => console.log('Update task response:', response)),
-      catchError(this.handleError)
+      catchError(error => {
+        console.error('Update task error details:', {
+          status: error.status,
+          message: error.message,
+          error: error.error
+        });
+        return throwError(() => new Error(`Failed to update task: ${error.status} ${error.message}`));
+      })
     );
   }
 
@@ -68,22 +76,7 @@ export class TaskService {
     );
   }
 
-  // assignMultipleUsersToTask(taskId: number, userIds: number[]): Observable<void> {
-  //   const assignMultipleUsersToTaskDto = {
-  //     UserIds: userIds,
-  //     TaskId: taskId
-  //   };
-    
-  //   return this.http.post<void>(
-  //     `${this.apiUrl}/assign-users`,  
-  //     assignMultipleUsersToTaskDto
-  //   ).pipe(
-  //     tap(response => console.log('Assign users response:', response)),
-  //     catchError(this.handleError)
-  //   );
-  // }
- 
-// task.service.ts
+  
 assignUserToTask(userId: number, taskId: number): Observable<any> {
   return this.http.post(
     `${this.apiUrl}/assign-user?userId=${userId}&taskId=${taskId}`, 
@@ -93,18 +86,11 @@ assignUserToTask(userId: number, taskId: number): Observable<any> {
     catchError(this.handleError)
   );
 }
-  // unassignUserFromTask(taskId: number, userId: number): Observable<void> {
-  //   return this.http.delete<void>(`${this.apiUrl}/unassign-user`, {
-  //     params: { userId: userId.toString(), taskId: taskId.toString() }
-  //   }).pipe(
-  //     tap(response => console.log('Unassign user response:', response)),
-  //     catchError(this.handleError)
-  //   );
-  // }
+
 
 
   unassignUserFromTask(taskId: number, userId: number): Observable<any> {
-    // Try using DELETE method instead of POST
+    
     return this.http.delete(
       `${this.apiUrl}/unassign-user?userId=${userId}&taskId=${taskId}`
     ).pipe(
@@ -116,13 +102,39 @@ assignUserToTask(userId: number, taskId: number): Observable<any> {
   private handleError(error: HttpErrorResponse): Observable<never> {
     let errorMessage = 'An unknown error occurred!';
     if (error.error instanceof ErrorEvent) {
-      // Client-side or network error
+      
       errorMessage = `Client-side error: ${error.error.message}`;
     } else {
-      // Server-side error
+    
       errorMessage = `Server-side error: ${error.status} - ${error.message}`;
     }
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
+
+  getProjectTasksBoard(projectId: number): Observable<Record<string, ITask[]>> {
+    return this.http.get<Record<string, ITask[]>>(`${this.apiUrl}/project/${projectId}/board`)
+      .pipe(
+        tap(board => console.log('Board data:', board)),
+        catchError(this.handleError)
+      );
+  }
+  
+  
+  updateTaskStatus(taskId: number, newStatus: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}/${taskId}/status`, JSON.stringify(newStatus), {
+      headers: { 'Content-Type': 'application/json' }
+    }).pipe(
+      tap(response => console.log('Update status response:', response)),
+      catchError(error => {
+        console.error('Update status error details:', {
+          status: error.status,
+          message: error.message,
+          error: error.error
+        });
+        return throwError(() => new Error(`Failed to update task status: ${error.status} ${error.message}`));
+      })
+    );
+  }
+
 }

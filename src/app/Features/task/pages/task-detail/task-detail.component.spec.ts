@@ -1,4 +1,4 @@
-// task-detail.component.spec.ts
+
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { TaskDetailComponent } from './task-detail.component';
@@ -34,7 +34,7 @@ describe('TaskDetailComponent', () => {
     
     fixture.detectChanges();
     
-    component.ngOnInit(); // Call ngOnInit to trigger data loading
+    component.ngOnInit(); 
   });
 
   it('should create', () => {

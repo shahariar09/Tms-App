@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [RouterOutlet,CommonModule,RouterModule], // Import RouterOutlet
+  imports: [RouterOutlet,CommonModule,RouterModule], 
 })
 export class AppComponent {
   userMenuOpen: boolean = false;

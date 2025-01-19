@@ -1,6 +1,6 @@
-<!-- task-list.component.html -->
+
 <div class="container">
-    <!-- Add Task Button -->
+    <!-- Task Button -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="title" style="font-size: 20px; font-weight: bold;">Task List</div>
         <button class="btn btn-outline-primary d-flex align-items-center gap-2 ms-auto"
@@ -50,11 +50,7 @@
 <i class="fa-solid fa-trash-can"></i>
 </button>
 
-<!-- View Detail Button 
-<button class="btn btn-info btn-sm"
-(click)="task.Id ? viewDetail(task.Id) : null">
-<i class="fa-solid fa-eye"></i> View
-</button>-->
+<!-- View Detail Button -->
 <button [routerLink]="['/task/task-detail', task.Id]" class="btn btn-info btn-sm">
     <i class="fa-solid fa-eye"></i> View
 </button>

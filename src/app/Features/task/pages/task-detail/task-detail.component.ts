@@ -12,7 +12,6 @@ import { forkJoin } from 'rxjs';
 })
 export class TaskDetailComponent implements OnInit {
   task: ITask | null = null;
-  //users: any[] = []; 
   assignedUsers: number[] = [];
   activeTab: string = 'info';
   isSubmitting = false;
@@ -105,17 +104,17 @@ assignUsers(): void {
 
   this.isSubmitting = true;
   
-  // Create an array of observables for each user assignment
+  
   const assignmentObservables = this.assignedUsers.map(userId => 
     this.taskService.assignUserToTask(userId, this.task!.Id!)
   );
 
-  // Use forkJoin to execute all assignments in parallel
+  
   forkJoin(assignmentObservables)
     .subscribe({
       next: () => {
         console.log('Users assigned successfully');
-        //this.loadTaskDetails(this.task!.Id!);
+        
         this.showSuccessMessage = true;
         this.isSubmitting = false;
       },
@@ -127,8 +126,8 @@ assignUsers(): void {
 }
 closeSuccessMessage(): void {
   this.showSuccessMessage = false;
-  this.activeTab = 'info'; // Switch to task info tab
-  this.loadTaskDetails(this.task!.Id!); // Reload task details
+  this.activeTab = 'info'; 
+  this.loadTaskDetails(this.task!.Id!); 
 }
 
 
@@ -159,11 +158,11 @@ closeSuccessMessage(): void {
         next: () => {
           this.showUnassignConfirm = false;
           this.showUnassignSuccess = true;
-          this.loadTaskDetails(this.task!.Id!); // Reload task details
+          this.loadTaskDetails(this.task!.Id!); 
         },
         error: (error) => {
           console.error('Failed to unassign user:', error);
-          // Handle error case
+          
         }
       });
   }

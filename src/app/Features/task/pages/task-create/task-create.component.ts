@@ -23,16 +23,31 @@ export class TaskCreateComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
+
   ngOnInit(): void {
     console.log('Component initialized');
-    this.initializeForm();
-    this.loadProjects();
+    
+    this.initializeForm(); 
+    this.loadProjects();   
+  
+    
     this.taskId = this.getTaskIdFromRoute();
     if (this.taskId) {
       this.isEdit = true;
-      this.loadTaskForEdit();
+      this.loadTaskForEdit(); 
     }
+  
+    
+    this.route.queryParams.subscribe(params => {
+      if (params['defaultStatus']) {
+        this.taskForm.patchValue({
+          Status: params['defaultStatus']
+        });
+      }
+    });
   }
+  
+
   private loadProjects(): void {
     console.log('Starting to load projects...');
     this.projectService.getAllProjects().subscribe({
@@ -40,17 +55,17 @@ export class TaskCreateComponent implements OnInit {
         console.log('Received projects:', projects);
         this.projects = projects;
         
-        // Only set default project if we're creating a new task (not editing)
+       
         if (!this.isEdit && projects.length > 0) {
           console.log('Setting default project:', projects[0]);
           this.taskForm.patchValue({
-            ProjectId: projects[0].Id  // Note the capital 'Id'
+            ProjectId: projects[0].Id  
           });
         }
       },
       error: (error) => {
         console.error('Error loading projects:', error);
-        // Handle the error appropriately
+        
       }
     });
   }
@@ -139,7 +154,7 @@ export class TaskCreateComponent implements OnInit {
     this.taskService.updateTask(this.taskId!, taskData).subscribe({
       next: () => {
         console.log('Task updated successfully');
-        this.router.navigate(['/task/task-list']);  // Adjusted path
+        this.router.navigate(['/task/task-list']);  
       },
       error: (error) => {
         console.error('Error updating task:', error);
@@ -160,7 +175,7 @@ export class TaskCreateComponent implements OnInit {
       Priority: taskData.Priority,
       Status: taskData.Status,
       DueDate: new Date(taskData.DueDate).toISOString(),
-      ProjectId: Number(taskData.ProjectId), // Ensure it's a number
+      ProjectId: Number(taskData.ProjectId), 
       AssignedUserIds: []
     };
   

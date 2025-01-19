@@ -1,4 +1,4 @@
-// src/app/Features/task/interfaces/task.ts
+
 export interface IUser{
   Id: number;
   Name: string;
@@ -11,13 +11,13 @@ export interface IUserTask {
   UserName: string;
 }
   export interface ITask {
-    Id?: number; // Optional for new tasks
-    Title: string; // Required
-    Description: string; // Required
-    Priority: string; // Low, Medium, High
+    Id?: number; 
+    Title: string; 
+    Description: string; 
+    Priority: string; 
     Status: string; // Open, Pending, InProgress, Done, Closed
-    DueDate: Date; // Required
-    ProjectId?: number; // Optional if not always needed
-    AssignedUsers?: IUserTask[]; // Optional list of assigned users
+    DueDate: Date; 
+    ProjectId?: number; 
+    AssignedUsers?: IUserTask[]; 
   }
   
