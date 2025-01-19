@@ -95,7 +95,47 @@
 
       </ul>
     </div>
+
+    <!-- Task Menu -->
+<div class="menu-section" style="margin-top: 20px;">
+  <div 
+    class="menu-header" 
+    style="cursor: pointer; display: flex; justify-content: space-between; align-items: center; padding: 10px 20px; font-size: 14px;"
+    data-bs-toggle="collapse" 
+    data-bs-target="#taskMenu"
+    aria-expanded="false"
+    aria-controls="taskMenu"
+  >
+    <span>&#x2022; Task</span>
+    <span class="arrow-indicator">&#9660;</span>
+  </div>
+  <ul 
+    id="taskMenu" 
+    class="submenu collapse"
+    style="list-style: none; margin: 0; padding: 5px 0 0 20px;"
+  >
+    <li style="margin: 5px 0;">
+      <a 
+        class="nav-link" 
+        href="/task/task-create"
+        style="color: white; text-decoration: none; font-size: 13px; cursor: pointer;"
+      >
+        Create Task
+      </a>
+    </li>
+    <li style="margin: 5px 0;">
+      <a 
+        class="nav-link" 
+        href="/task/task-list"
+        style="color: white; text-decoration: none; font-size: 13px; cursor: pointer;"
+      >
+        Task List
+      </a>
+    </li>
+  </ul>
+</div>
   </aside>
+
 
   <!-- Main Content -->
   <main class="main-content" style="flex: 1; display: flex; flex-direction: column;">

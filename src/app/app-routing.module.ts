@@ -22,6 +22,12 @@ const routes: Routes = [
       import('../app/Features/project-module/project-module.module').then((m) => m.ProjectModuleModule),
   },
   
+  {
+    path: 'task',
+    loadChildren: () =>
+      import('../app/Features/task/task.module').then((m) => m.TaskModule),
+  }
+
 ];
 
 @NgModule({

@@ -1,0 +1,174 @@
+<div class="container mt-4">
+  <h2 class="mb-4">Task Details</h2>
+
+  <!-- Loading Spinner -->
+  <div *ngIf="isLoading" class="text-center my-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && task">
+    <!-- Tabs -->
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'info'" (click)="setActiveTab('info')" role="button">
+          Task Info
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="activeTab === 'assign'" (click)="setActiveTab('assign')" role="button">
+          Assign User
+        </a>
+      </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+      <!-- Task Info Tab -->
+      <div [ngClass]="{ 'd-none': activeTab !== 'info' }">
+        <h4 class="mb-4">Task Information</h4>
+
+        <div class="mb-3">
+          <strong>Title:</strong>
+          <p class="mt-1">{{ task.Title }}</p>
+        </div>
+
+        <div class="mb-3">
+          <strong>Description:</strong>
+          <p class="mt-1">{{ task.Description }}</p>
+        </div>
+
+        <div class="mb-3">
+          <strong>Priority:</strong>
+          <p class="mt-1">{{ task.Priority }}</p>
+        </div>
+
+        <div class="mb-3">
+          <strong>Status:</strong>
+          <p class="mt-1">{{ task.Status }}</p>
+        </div>
+
+        <div class="mb-3">
+          <strong>Due Date:</strong>
+          <p class="mt-1">{{ task.DueDate | date: 'dd-MMM-yyyy' }}</p>
+        </div>
+
+        <!-- Assigned Users Section with improved styling -->
+        <div class="mb-3">
+          <strong>Assigned Users:</strong>
+          <div class="mt-2">
+            <div *ngIf="task.AssignedUsers && task.AssignedUsers.length > 0">
+              <div *ngFor="let user of task.AssignedUsers" 
+                   class="d-flex align-items-center p-2 mb-2 border rounded">
+                <span class="flex-grow-1">{{ user.UserName }}</span>
+                <button 
+                  class="btn btn-outline-secondary btn-sm"
+                  (click)="confirmUnassign(user)"
+                  title="Unassign user"
+                >
+                  <i class="bi bi-x"></i> Remove
+                </button>
+              </div>
+            </div>
+            <p *ngIf="!task.AssignedUsers?.length" class="text-muted">
+              No users assigned to this task.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assign User Tab -->
+      <div [ngClass]="{ 'd-none': activeTab !== 'assign' }">
+        <h4 class="mb-4">Assign Users</h4>
+        <div class="card">
+          <div class="card-body">
+            <div class="mb-4">
+              <div *ngFor="let user of users" class="form-check mb-2">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  [id]="'user-' + user.Id"
+                  [checked]="assignedUsers.includes(user.Id)"
+                  (change)="toggleUserSelection(user.Id)"
+                />
+                <label class="form-check-label" [for]="'user-' + user.Id">
+                  {{ user.Name }} ({{ user.Email }})
+                </label>
+              </div>
+            </div>
+
+            <button
+              class="btn btn-primary"
+              (click)="assignUsers()"
+              [disabled]="isSubmitting || assignedUsers.length === 0"
+            >
+              {{ isSubmitting ? 'Assigning...' : 'Assign Selected Users' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="!isLoading && !task" class="alert alert-danger mt-4">
+    Failed to load task details. Please try again later.
+  </div>
+
+  <!-- Unassign Confirmation Modal -->
+  <div *ngIf="showUnassignConfirm" class="modal" style="display: block; background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirm Unassign</h5>
+          <button type="button" class="btn-close" (click)="cancelUnassign()"></button>
+        </div>
+        <div class="modal-body">
+          <p class="mb-0">Are you sure you want to unassign {{ selectedUserToUnassign?.UserName }} from this task?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cancelUnassign()">Cancel</button>
+          <button type="button" class="btn btn-danger" [disabled]="isUnassigning" (click)="unassignUser()">
+            <span *ngIf="isUnassigning" class="spinner-border spinner-border-sm me-1"></span>
+            {{ isUnassigning ? 'Unassigning...' : 'Unassign' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div
+    *ngIf="showSuccessMessage"
+    class="modal fade show"
+    tabindex="-1"
+    role="dialog"
+    style="display: block; background-color: rgba(0, 0, 0, 0.5);"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <p class="mb-0">Users successfully assigned to the project!</p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-primary" (click)="closeSuccessMessage()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unassign Success Modal -->
+  <div *ngIf="showUnassignSuccess" class="modal" style="display: block; background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <p class="mb-0">User successfully unassigned!</p>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="button" class="btn btn-primary" (click)="closeUnassignSuccess()">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

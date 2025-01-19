@@ -1,15 +1,3 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-root',
-//   templateUrl: './app.component.html',
-//   styleUrl: './app.component.scss'
-// })
-// export class AppComponent {
-//   title = 'Tms-App';
-// }
-
-
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core'; 
 import { CommonModule } from '@angular/common'; 
@@ -25,7 +13,7 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   userMenuOpen: boolean = false;
   projectMenuOpen: boolean = false;;
-  
+  taskMenuOpen: boolean = false;
 
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
@@ -33,6 +21,11 @@ export class AppComponent {
   toggleProjectMenu(){
     this.projectMenuOpen = !this.projectMenuOpen;
   }
+
+  toggleTaskMenu(){
+    this.taskMenuOpen = !this.taskMenuOpen;
+  }
+
 
   logClick(link: string): void {
     console.log(`${link} clicked`);

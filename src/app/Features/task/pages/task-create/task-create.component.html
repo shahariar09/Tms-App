@@ -1,0 +1,99 @@
+<div class="container-fluid">
+  <header class="navbar" style="background-color: #345e78; color: white; padding: 17px 20px;">
+    <h5 class="fw-bold mb-0">
+      {{ isEdit ? 'Edit Task Details' : 'Create New Task' }}
+    </h5>
+  </header>
+
+  <div class="card shadow-sm p-4 border-0 mt-3">
+    <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <!-- Task Title -->
+      <div class="mb-4">
+        <label for="Title" class="form-label fw-semibold">Task Title <span class="text-danger">*</span></label>
+        <input 
+          id="Title" 
+          type="text" 
+          class="form-control" 
+          placeholder="Enter task title" 
+          formControlName="Title" 
+        />
+        <div *ngIf="taskForm.get('Title')?.invalid && taskForm.get('Title')?.touched" class="text-danger small">
+          Task title is required.
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-4">
+        <label for="Description" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+        <textarea 
+          id="Description" 
+          class="form-control" 
+          rows="5" 
+          placeholder="Provide a detailed description of the task" 
+          formControlName="Description"
+        ></textarea>
+        <div *ngIf="taskForm.get('Description')?.invalid && taskForm.get('Description')?.touched" class="text-danger small">
+          Description is required.
+        </div>
+      </div>
+
+      <!-- Priority -->
+      <div class="mb-4">
+        <label for="Priority" class="form-label fw-semibold">Priority</label>
+        <select id="Priority" class="form-select" formControlName="Priority">
+          <option value="" disabled>Select priority</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+      </div>
+
+      <!-- Status -->
+      <div class="mb-4">
+        <label for="Status" class="form-label fw-semibold">Status</label>
+        <select id="Status" class="form-select" formControlName="Status">
+          <option value="" disabled>Select status</option>
+          <option value="Open">Open</option>
+          <option value="Pending">Pending</option>
+          <option value="InProgress">In Progress</option>
+          <option value="Done">Done</option>
+          <option value="Closed">Closed</option>
+        </select>
+      </div>
+
+      <!-- Due Date -->
+      <div class="mb-4">
+        <label for="DueDate" class="form-label fw-semibold">Due Date <span class="text-danger">*</span></label>
+        <input id="DueDate" type="date" class="form-control" formControlName="DueDate" />
+        <div *ngIf="taskForm.get('DueDate')?.invalid && taskForm.get('DueDate')?.touched" class="text-danger small">
+          Due date is required.
+        </div>
+      </div>
+
+<!-- Project -->
+<div class="mb-4">
+  <label for="ProjectId" class="form-label fw-semibold">Project</label>
+  <select id="ProjectId" class="form-select" formControlName="ProjectId">
+    <option [ngValue]="null">Select a project</option>
+    <option *ngFor="let project of projects" [value]="project.Id">
+      {{project.Name}}
+    </option>
+  </select>
+</div>
+
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-end gap-3">
+        <button class="btn btn-light" type="button" routerLink="/task/task-list">
+          Cancel
+        </button>
+        <button 
+          class="btn btn-primary" 
+          type="submit"
+          [disabled]="taskForm.invalid">
+          {{ isEdit ? 'Update' : 'Save' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
