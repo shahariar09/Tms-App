@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+
 @NgModule({
   imports: [
     BrowserModule,      
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatIconModule,
     DragDropModule,
     BrowserAnimationsModule,
+    
     
 
   ],

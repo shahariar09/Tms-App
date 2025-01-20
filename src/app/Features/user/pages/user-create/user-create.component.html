@@ -90,5 +90,8 @@
         </div>
       </form>
     </div>
-  
+  <!-- Temporary Password Message -->
+  <div *ngIf="tempPassword" class="alert alert-success mt-4">
+    User created successfully! Temporary Password: <strong>{{ tempPassword }}</strong>
+  </div>
 </div>

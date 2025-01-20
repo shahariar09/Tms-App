@@ -27,6 +27,7 @@ const routes: Routes = [
     loadChildren: () => import('./Features/task-board/task-board.module')
       .then(m => m.TaskBoardModule)
   }
+ 
 ];
 
 @NgModule({

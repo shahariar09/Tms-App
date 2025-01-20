@@ -37,7 +37,7 @@ export class TaskDetailComponent implements OnInit {
   }
 
   private loadUsers(): void {
-    console.log('Starting to load users from:', this.userService.apiUrl + "/api/User/GetAllUsers");
+    console.log('Starting to load users from:', this.userService.apiUrl + "/api/user");
     this.userService.getAllUsers().subscribe({
       next: (users) => {
         console.log('Raw API response:', users);
