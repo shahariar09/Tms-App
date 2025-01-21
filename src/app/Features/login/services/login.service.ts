@@ -13,4 +13,13 @@ export class LoginService {
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials);
   }
+
+  changePassword(payload: {
+    email: string;
+    currentPassword: string;
+    newPassword: string;
+    confirmPassword: string;
+  }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/change-password`, payload);
+  }
 }

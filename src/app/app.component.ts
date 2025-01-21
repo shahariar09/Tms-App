@@ -34,7 +34,10 @@ export class AppComponent {
   }
 
   isLoginPage(): boolean {
-    return this.router.url.includes('/userLogin'); // Match the login route
+    return this.router.url.includes('/userLogin'); 
+  }
+  isChangePasswordPage(): boolean {
+    return this.router.url.includes('change-password');
   }
   
 }
