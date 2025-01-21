@@ -1,21 +1,25 @@
-<div class="container-fluid">
+<div class="container-fluid" style="height: calc(100vh - 20px);">
   <div class="row mb-3">
     <div class="col d-flex justify-content-between align-items-center">
       <h2>Project Board</h2>
       <button class="btn btn-primary" (click)="navigateToCreateTask('Open')">
-        <i class="bi bi-plus"></i> Add Task
+        + Add Task
       </button>
     </div>
   </div>
 
-  <div class="row g-3">
+  <div class="row g-3" style="height: calc(100% - 60px);">
     <div class="col" *ngFor="let status of ['Open', 'Pending', 'InProgress', 'Done', 'Closed']">
       <div class="card h-100">
-        <div class="card-header d-flex justify-content-between align-items-center bg-light">
-          <h5 class="card-title mb-0">{{ status }}</h5>
-          <button class="btn btn-sm btn-outline-primary" (click)="navigateToCreateTask(status)">
-            <i class="bi bi-plus"></i>
-          </button>
+        <div class="card-header bg-light py-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">{{ status }}</h5>
+            <button class="btn btn-outline-primary btn-sm" 
+                    (click)="navigateToCreateTask(status)" 
+                    style="width: 25px; height: 25px; line-height: 1; padding: 0; font-size: 18px; font-weight: bold;">
+              +
+            </button>
+          </div>
         </div>
 
         <div class="card-body task-list p-2"
@@ -25,33 +29,32 @@
              [cdkDropListConnectedTo]="['Open', 'Pending', 'InProgress', 'Done', 'Closed']"
              (cdkDropListDropped)="onDrop($event)"
              [cdkDropListDisabled]="isProcessingDrop"
-             style="min-height: 200px;">
-          
-          <div class="card mb-2 task-card" 
-               *ngFor="let task of boardColumns[status]"
-               cdkDrag
-               style="cursor: move;">
-            <div class="card-body p-2">
-              <h6 class="card-title mb-1">{{ task.Title }}</h6>
-              <p class="card-text small mb-1 text-muted">{{ task.Description }}</p>
-              <div class="d-flex justify-content-between align-items-center mb-1">
-                <span class="badge" 
-                      [ngClass]="{
-                        'bg-danger': task.Priority === 'High',
-                        'bg-warning': task.Priority === 'Medium',
-                        'bg-info': task.Priority === 'Low'
-                      }">
-                  {{ task.Priority }}
-                </span>
-                <small class="text-muted">Due: {{ formatDate(task.DueDate) }}</small>
-              </div>
-              <small class="text-muted d-block">
-                Assigned: {{ getAssignedUserNames(task.AssignedUsers) }}
-              </small>
+             style="overflow-y: auto;">
+             <div class="card mb-2 task-card"
+             *ngFor="let task of boardColumns[status]"
+             cdkDrag
+             style="cursor: move;">
+          <div class="card-body p-2">
+            <h6 class="card-title mb-1">{{ task.Title }}</h6>
+            <p class="card-text small mb-1 text-muted">{{ task.Description }}</p>
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <span class="badge"
+                    [ngClass]="{
+                      'bg-danger': task.Priority === 'High',
+                      'bg-warning': task.Priority === 'Medium',
+                      'bg-info': task.Priority === 'Low'
+                    }">
+                {{ task.Priority }}
+              </span>
+              <small class="text-muted">Due: {{ formatDate(task.DueDate) }}</small>
             </div>
+            <small class="text-muted d-block">
+              Assigned: {{ getAssignedUserNames(task.AssignedUsers) }}
+            </small>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>

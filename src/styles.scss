@@ -66,3 +66,52 @@
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
   }
   
+  .menu-section {
+    margin-top: auto;
+    padding: 8px;
+  }
+  
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px 16px;
+    background-color: #1b3148; /* Matching your sidebar's dark navy blue */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .logout-btn:hover {
+    background-color: #234163; /* Slightly lighter shade for hover */
+  }
+  
+  .logout-text {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .logout-icon {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s ease;
+  }
+  
+  .logout-btn:hover .logout-text {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  
+  .logout-btn:hover .logout-icon {
+    opacity: 1;
+    transform: translateX(0);
+  }

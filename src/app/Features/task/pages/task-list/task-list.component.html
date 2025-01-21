@@ -12,10 +12,11 @@
 
     <!-- Bootstrap Table -->
     <div class="mb-2 d-flex justify-content-end">
-        <div class="position-relative w-25 search-section">
-            <span class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
-            <input type="text" class="form-control" placeholder="Search tasks..." 
+        <div class="position-relative w-25">
+            <input type="text" class="form-control pe-5" placeholder="Search tasks..." 
                    (input)="filterTasks($event)">
+            <i class="fa-solid fa-magnifying-glass position-absolute" 
+               style="right: 10px; top: 50%; transform: translateY(-50%); color: #6c757d;"></i>
         </div>
     </div>
 
