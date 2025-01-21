@@ -1,4 +1,4 @@
-import { RouterModule, RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core'; 
 import { CommonModule } from '@angular/common'; 
 
@@ -15,6 +15,8 @@ export class AppComponent {
   projectMenuOpen: boolean = false;;
   taskMenuOpen: boolean = false;
 
+  constructor(private router: Router) {}
+
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
   }
@@ -29,6 +31,10 @@ export class AppComponent {
 
   logClick(link: string): void {
     console.log(`${link} clicked`);
+  }
+
+  isLoginPage(): boolean {
+    return this.router.url.includes('/userLogin'); // Match the login route
   }
   
 }

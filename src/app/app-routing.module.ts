@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'user/user-list', pathMatch: 'full' },
+  { path: '', redirectTo: 'login/userLogin', pathMatch: 'full' },
   
   {
     path: 'user',
@@ -26,6 +26,11 @@ const routes: Routes = [
     path: 'task-board',
     loadChildren: () => import('./Features/task-board/task-board.module')
       .then(m => m.TaskBoardModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./Features/login/login.module')
+      .then(m => m.LoginModule)
   }
  
 ];
