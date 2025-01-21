@@ -1,6 +1,7 @@
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core'; 
 import { CommonModule } from '@angular/common'; 
+import { LoginService } from './Features/login/services/login.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class AppComponent {
   projectMenuOpen: boolean = false;;
   taskMenuOpen: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
@@ -38,6 +39,10 @@ export class AppComponent {
   }
   isChangePasswordPage(): boolean {
     return this.router.url.includes('change-password');
+  }
+
+  logout() {
+    this.loginService.logout(); // Call the logout method from LoginService
   }
   
 }
