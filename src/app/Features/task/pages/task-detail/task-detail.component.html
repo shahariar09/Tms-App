@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h2 class="mb-4">Task Details</h2>
+  <h2 class="mb-4" >Task Details</h2>
 
   <!-- Loading Spinner -->
   <div *ngIf="isLoading" class="text-center my-5">
@@ -12,12 +12,24 @@
     <!-- Tabs -->
     <ul class="nav nav-tabs mb-4">
       <li class="nav-item">
-        <a class="nav-link" [class.active]="activeTab === 'info'" (click)="setActiveTab('info')" role="button">
+        <a
+          class="nav-link"
+          [class.active]="activeTab === 'info'"
+          (click)="setActiveTab('info')"
+          role="button"
+          style="color: #345e78;"
+        >
           Task Info
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" [class.active]="activeTab === 'assign'" (click)="setActiveTab('assign')" role="button">
+        <a
+          class="nav-link"
+          [class.active]="activeTab === 'assign'"
+          (click)="setActiveTab('assign')"
+          role="button"
+          style="color: #345e78;"
+        >
           Assign User
         </a>
       </li>
@@ -27,7 +39,7 @@
     <div class="tab-content">
       <!-- Task Info Tab -->
       <div [ngClass]="{ 'd-none': activeTab !== 'info' }">
-        <h4 class="mb-4">Task Information</h4>
+        <h4 class="mb-4" >Task Information</h4>
 
         <div class="mb-3">
           <strong>Title:</strong>
@@ -59,13 +71,16 @@
           <strong>Assigned Users:</strong>
           <div class="mt-2">
             <div *ngIf="task.AssignedUsers && task.AssignedUsers.length > 0">
-              <div *ngFor="let user of task.AssignedUsers" 
-                   class="d-flex align-items-center p-2 mb-2 border rounded">
+              <div
+                *ngFor="let user of task.AssignedUsers"
+                class="d-flex align-items-center p-2 mb-2 border rounded"
+              >
                 <span class="flex-grow-1">{{ user.UserName }}</span>
-                <button 
+                <button
                   class="btn btn-outline-secondary btn-sm"
                   (click)="confirmUnassign(user)"
                   title="Unassign user"
+                  style="color: #345e78; border-color: #345e78;"
                 >
                   <i class="bi bi-x"></i> Remove
                 </button>
@@ -80,7 +95,7 @@
 
       <!-- Assign User Tab -->
       <div [ngClass]="{ 'd-none': activeTab !== 'assign' }">
-        <h4 class="mb-4">Assign Users</h4>
+        <h4 class="mb-4" style="color: #345e78;">Assign Users</h4>
         <div class="card">
           <div class="card-body">
             <div class="mb-4">
@@ -92,16 +107,20 @@
                   [checked]="assignedUsers.includes(user.Id)"
                   (change)="toggleUserSelection(user.Id)"
                 />
-                <label class="form-check-label" [for]="'user-' + user.Id">
+                <label
+                  class="form-check-label"
+                  [for]="'user-' + user.Id"
+                >
                   {{ user.Name }} ({{ user.Email }})
                 </label>
               </div>
             </div>
 
             <button
-              class="btn btn-primary"
+              class="btn"
               (click)="assignUsers()"
               [disabled]="isSubmitting || assignedUsers.length === 0"
+              style="background-color: #345e78; color: white;"
             >
               {{ isSubmitting ? 'Assigning...' : 'Assign Selected Users' }}
             </button>
@@ -117,19 +136,43 @@
   </div>
 
   <!-- Unassign Confirmation Modal -->
-  <div *ngIf="showUnassignConfirm" class="modal" style="display: block; background-color: rgba(0,0,0,0.5);">
+  <div
+    *ngIf="showUnassignConfirm"
+    class="modal"
+    style="display: block; background-color: rgba(0, 0, 0, 0.5);"
+  >
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Confirm Unassign</h5>
-          <button type="button" class="btn-close" (click)="cancelUnassign()"></button>
+          <h5 class="modal-title" style="color: #345e78;">
+            Confirm Unassign
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="cancelUnassign()"
+          ></button>
         </div>
         <div class="modal-body">
-          <p class="mb-0">Are you sure you want to unassign {{ selectedUserToUnassign?.UserName }} from this task?</p>
+          <p class="mb-0">
+            Are you sure you want to unassign
+            {{ selectedUserToUnassign?.UserName }} from this task?
+          </p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="cancelUnassign()">Cancel</button>
-          <button type="button" class="btn btn-danger" [disabled]="isUnassigning" (click)="unassignUser()">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="cancelUnassign()"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            [disabled]="isUnassigning"
+            (click)="unassignUser()"
+          >
             <span *ngIf="isUnassigning" class="spinner-border spinner-border-sm me-1"></span>
             {{ isUnassigning ? 'Unassigning...' : 'Unassign' }}
           </button>
@@ -152,21 +195,14 @@
           <p class="mb-0">Users successfully assigned to the project!</p>
         </div>
         <div class="modal-footer border-0 justify-content-center">
-          <button type="button" class="btn btn-primary" (click)="closeSuccessMessage()">OK</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Unassign Success Modal -->
-  <div *ngIf="showUnassignSuccess" class="modal" style="display: block; background-color: rgba(0,0,0,0.5);">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          <p class="mb-0">User successfully unassigned!</p>
-        </div>
-        <div class="modal-footer border-0">
-          <button type="button" class="btn btn-primary" (click)="closeUnassignSuccess()">OK</button>
+          <button
+            type="button"
+            class="btn"
+            (click)="closeSuccessMessage()"
+            style="background-color: #345e78; color: white;"
+          >
+            OK
+          </button>
         </div>
       </div>
     </div>

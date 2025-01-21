@@ -1,10 +1,6 @@
 <div class="container">
   <!-- User List Button -->
   <div class="d-flex justify-content-end my-3">
-    <!-- <button class="btn btn-outline-primary d-flex align-items-center gap-2" routerLink="/user-list">
-      <i class="bi bi-card-list"></i>
-      View All Users
-    </button> -->
   </div>
 
   <!-- Header Section -->
@@ -15,83 +11,89 @@
   </header>
 
   <!-- Form Container -->
+  <div class="card shadow-sm p-4">
+    <form [formGroup]="userForm" (ngSubmit)="save()">
+      <!-- Name Field -->
+      <div class="mb-3">
+        <label for="Name" class="form-label fw-semibold">Name <span class="text-danger">*</span></label>
+        <input
+          id="Name"
+          type="text"
+          class="form-control"
+          placeholder="Name"
+          formControlName="Name"
+        />
+        <small
+          *ngIf="userForm.get('Name')?.invalid && userForm.get('Name')?.touched"
+          class="text-danger"
+        >
+          Name is required.
+        </small>
+      </div>
+
+      <!-- Email Field -->
+      <div class="mb-3">
+        <label for="Email" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
+        <input
+          id="Email"
+          type="email"
+          class="form-control"
+          placeholder="Email"
+          formControlName="Email"
+        />
+        <small
+          *ngIf="userForm.get('Email')?.invalid && userForm.get('Email')?.touched"
+          class="text-danger"
+        >
+          Email is required and must be a valid email address.
+        </small>
+      </div>
+
+      <!-- Role Name Field -->
+      <div class="mb-3">
+        <label for="RoleName" class="form-label fw-semibold">Role Name <span class="text-danger">*</span></label>
+        <select
+          id="RoleName"
+          class="form-select"
+          formControlName="RoleId"
+        >
+          <option value="" disabled selected>Select Role</option>
+          <option value="1">Admin</option>
+          <option value="2">User</option>
+          <option value="3">Manager</option>
+        </select>
+        <small
+          *ngIf="userForm.get('RoleId')?.invalid && userForm.get('RoleId')?.touched"
+          class="text-danger"
+        >
+          Role Name is required.
+        </small>
+      </div>
+
+      <!-- Buttons -->
+      <div class="d-flex justify-content-end gap-3">
+        <button 
+          class="btn" 
+          type="button" 
+          routerLink="/user/user-list"
+          style="background-color: #ffffff; border: 1px solid #345e78; color: #345e78;"
+        >
+          Cancel
+        </button>
+        <button
+          class="btn"
+          [disabled]="userForm.invalid"
+          type="submit"
+          style="background-color: #345e78; color: white; border: none;"
+        >
+          {{ isEdit ? 'Update' : 'Add' }}
+        </button>
+      </div>
+    </form>
+  </div>
   
-    <div class="card shadow-sm p-4">
-      <form [formGroup]="userForm" (ngSubmit)="save()">
-        <!-- Name Field -->
-        <div class="mb-3">
-          <label for="Name" class="form-label fw-semibold">Name <span class="text-danger">*</span></label>
-          <input
-            id="Name"
-            type="text"
-            class="form-control"
-            placeholder="Name"
-            formControlName="Name"
-          />
-          <small
-            *ngIf="userForm.get('Name')?.invalid && userForm.get('Name')?.touched"
-            class="text-danger"
-          >
-            Name is required.
-          </small>
-        </div>
-
-        <!-- Email Field -->
-        <div class="mb-3">
-          <label for="Email" class="form-label fw-semibold">Email <span class="text-danger">*</span></label>
-          <input
-            id="Email"
-            type="email"
-            class="form-control"
-            placeholder="Email"
-            formControlName="Email"
-          />
-          <small
-            *ngIf="userForm.get('Email')?.invalid && userForm.get('Email')?.touched"
-            class="text-danger"
-          >
-            Email is required and must be a valid email address.
-          </small>
-        </div>
-
-        <!-- Role Name Field -->
-        <div class="mb-3">
-          <label for="RoleName" class="form-label fw-semibold">Role Name <span class="text-danger">*</span></label>
-          <select
-            id="RoleName"
-            class="form-select"
-            formControlName="RoleId"
-          >
-            <option value="" disabled selected>Select Role</option>
-            <option value="1">Admin</option>
-            <option value="2">User</option>
-            <option value="3">Manager</option>
-          </select>
-          <small
-            *ngIf="userForm.get('RoleId')?.invalid && userForm.get('RoleId')?.touched"
-            class="text-danger"
-          >
-            Role Name is required.
-          </small>
-        </div>
-
-        <!-- Buttons -->
-        <div class="d-flex justify-content-end gap-3">
-          <button class="btn btn-light" type="button" routerLink="/user/user-list">
-            Cancel
-          </button>
-          <button
-            class="btn btn-success"
-            [disabled]="userForm.invalid"
-            type="submit"
-          >
-            {{ isEdit ? 'Update' : 'Add' }}
-          </button>
-        </div>
-      </form>
-    </div>
   <!-- Temporary Password Message -->
-  <div *ngIf="tempPassword" class="alert alert-success mt-4">
+  <div *ngIf="tempPassword" class="alert mt-4" style="background-color: #345e78; color: white;">
     User created successfully! Temporary Password: <strong>{{ tempPassword }}</strong>
   </div>
 </div>

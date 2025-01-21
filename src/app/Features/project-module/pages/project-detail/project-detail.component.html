@@ -37,14 +37,15 @@
         <ul>
           <li *ngFor="let user of project?.ProjectUsers">
             {{ user.UserName }}
-      
+
             <button 
               *ngIf="user.UserId" 
               class="btn btn-sm btn-light ms-2" 
               (click)="unassignUser(user.UserId)" 
               title="Unassign User"
-              >
-              <i class="fa-solid fa-times text-danger"></i>
+              style="color: #345e78;"
+            >
+              <i class="fa-solid fa-times" style="color: #345e78;"></i>
             </button>
           </li>
         </ul>
@@ -57,9 +58,6 @@
     <!-- Assign User Tab -->
     <div [ngClass]="{'tab-pane': true, 'fade': true, 'show active': activeTab === 'assign'}">
       <h4>Assign Users to Project</h4>
-
-      
-  
 
       <!-- User Selection -->
       <div class="mb-3">
@@ -90,6 +88,7 @@
         class="btn btn-primary"
         (click)="assignUsers()"
         [disabled]="isSubmitting"
+        style="background-color: #345e78; border-color: #345e78;"
       >
         {{ isSubmitting ? 'Assigning...' : 'Assign Users' }}
       </button>

@@ -1,6 +1,9 @@
 <div class="container-fluid">
   <!-- Header Section -->
-  <header class="navbar" style="background-color: #345e78; color: white; padding: 17px 20px; display: flex; align-items: center;">
+  <header
+    class="navbar"
+    style="background-color: #345e78; color: white; padding: 17px 20px; display: flex; align-items: center;"
+  >
     <h5 class="fw-bold mb-0">
       {{ isEdit ? 'Edit Project Details' : 'Create New Project' }}
     </h5>
@@ -11,7 +14,13 @@
     <form [formGroup]="projectForm" (ngSubmit)="save()">
       <!-- Project Name -->
       <div class="mb-4">
-        <label for="Name" class="form-label fw-semibold">Project Name <span class="text-danger">*</span></label>
+        <label
+          for="Name"
+          class="form-label fw-semibold"
+          style="color: #345e78;"
+        >
+          Project Name <span class="text-danger">*</span>
+        </label>
         <input
           id="Name"
           type="text"
@@ -29,7 +38,13 @@
 
       <!-- Description -->
       <div class="mb-4">
-        <label for="Description" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+        <label
+          for="Description"
+          class="form-label fw-semibold"
+          style="color: #345e78;"
+        >
+          Description <span class="text-danger">*</span>
+        </label>
         <textarea
           id="Description"
           class="form-control"
@@ -47,7 +62,13 @@
 
       <!-- Due Date -->
       <div class="mb-4">
-        <label for="DueDate" class="form-label fw-semibold">Due Date <span class="text-danger">*</span></label>
+        <label
+          for="DueDate"
+          class="form-label fw-semibold"
+          style="color: #345e78;"
+        >
+          Due Date <span class="text-danger">*</span>
+        </label>
         <input
           id="DueDate"
           type="date"
@@ -65,13 +86,19 @@
 
       <!-- Buttons -->
       <div class="d-flex justify-content-end gap-3">
-        <button class="btn btn-light" type="button" routerLink="/project-module/Project-list">
+        <button
+          class="btn"
+          type="button"
+          routerLink="/project-module/Project-list"
+          style="background-color: #345e78; color: white;"
+        >
           Cancel
         </button>
         <button
-          class="btn btn-primary"
+          class="btn"
           [disabled]="projectForm.invalid"
           type="submit"
+          style="background-color: #345e78; color: white;"
         >
           {{ isEdit ? 'Update' : 'Save' }}
         </button>
