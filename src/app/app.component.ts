@@ -2,6 +2,7 @@ import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { Component } from '@angular/core'; 
 import { CommonModule } from '@angular/common'; 
 import { LoginService } from './Features/login/services/login.service';
+import { AuthService } from './Features/login/services/auth.service';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class AppComponent {
   projectMenuOpen: boolean = false;;
   taskMenuOpen: boolean = false;
 
-  constructor(private router: Router, private loginService: LoginService) {}
+  constructor(private router: Router, private loginService: LoginService,private authService: AuthService) {}
 
   toggleUserMenu() {
     this.userMenuOpen = !this.userMenuOpen;
@@ -42,7 +43,9 @@ export class AppComponent {
   }
 
   logout() {
-    this.loginService.logout(); // Call the logout method from LoginService
+    this.authService.logout(); // Clear token
+    this.router.navigate(['/login/userLogin']); // Redirect to login page
   }
+  
   
 }

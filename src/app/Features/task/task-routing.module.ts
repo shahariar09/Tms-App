@@ -4,23 +4,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { TaskListComponent } from './pages/task-list/task-list.component';
 import { TaskCreateComponent } from './pages/task-create/task-create.component';
 import { TaskDetailComponent } from './pages/task-detail/task-detail.component';
+import { authGuard } from '../auth.guard';
 
 const routes: Routes = [
   {
     path: 'task-list',
-    component: TaskListComponent
+    component: TaskListComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'task-create',
-    component: TaskCreateComponent
+    component: TaskCreateComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'task-create/:Id',
-    component: TaskCreateComponent
+    component: TaskCreateComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'task-detail/:Id',
-    component: TaskDetailComponent
+    component: TaskDetailComponent,
+    canActivate: [authGuard],
   }
 ];
 

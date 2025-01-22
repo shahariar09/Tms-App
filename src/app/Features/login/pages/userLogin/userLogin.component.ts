@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginService } from '../../services/login.service'; // Update the path to your service as needed
+import { LoginService } from '../../services/login.service'; 
 import { Router } from '@angular/router';
 
 interface LoginResponse {
@@ -28,28 +28,22 @@ password: ['', Validators.required]
 
   onSubmit() {
     if (this.loginForm.valid) {
-      const loginData = this.loginForm.value; // { Email: "string", Password: "string" }
+      const loginData = this.loginForm.value; 
   
       this.loginService.login(loginData).subscribe(
         (response: LoginResponse) => {
           if (response && response.token) {
-            // Login successful
+            
             alert(response.message);
             console.log('Token:', response.token);
-            
-            // Example: Store the token and navigate to a new route
             localStorage.setItem('authToken', response.token);
             this.router.navigate(['/project-module/project-create']);
           } else {
-            // Handle unexpected response format
+            
             alert('Unexpected response from the server.');
           }
         },
-        // (error) => {
-        //   // Handle errors (e.g., network issues, server errors)
-        //   console.error('Error during login:', error);
-        //   alert('An error occurred during login. Please try again.');
-        // }
+       
       );
     } else {
       alert('Please fill in all required fields.');
