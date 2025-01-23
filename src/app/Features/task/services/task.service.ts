@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap,map } from 'rxjs/operators';
 import { ITask } from '../interface/task';
 
 
@@ -55,19 +55,33 @@ export class TaskService {
     );
   }
   
-  updateTask(id: number, task: Partial<ITask>): Observable<any> {
+  // updateTask(id: number, task: Partial<ITask>): Observable<any> {
+  //   return this.http.put(`${this.apiUrl}/${id}`, task).pipe(
+  //     tap(response => console.log('Update task response:', response)),
+  //     catchError(error => {
+  //       console.error('Update task error details:', {
+  //         status: error.status,
+  //         message: error.message,
+  //         error: error.error
+  //       });
+  //       return throwError(() => new Error(`Failed to update task: ${error.status} ${error.message}`));
+  //     })
+  //   );
+  // }
+  updateTask(id: number, task: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, task).pipe(
-      tap(response => console.log('Update task response:', response)),
       catchError(error => {
-        console.error('Update task error details:', {
+        console.error('Detailed Update Error:', {
           status: error.status,
           message: error.message,
-          error: error.error
+          details: error.error
         });
-        return throwError(() => new Error(`Failed to update task: ${error.status} ${error.message}`));
+        return throwError(() => error);
       })
     );
   }
+
+
 
   deleteTask(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`).pipe(
@@ -137,4 +151,5 @@ assignUserToTask(userId: number, taskId: number): Observable<any> {
     );
   }
 
+  
 }

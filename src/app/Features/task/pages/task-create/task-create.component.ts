@@ -21,7 +21,9 @@ export class TaskCreateComponent implements OnInit {
     private projectService: ProjectService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) {
+
+  }
 
 
   ngOnInit(): void {
@@ -150,17 +152,22 @@ export class TaskCreateComponent implements OnInit {
       this.createTask(taskData);
     }
   }
-  private updateTask(taskData: ITask): void {
-    this.taskService.updateTask(this.taskId!, taskData).subscribe({
-      next: () => {
-        console.log('Task updated successfully');
-        this.router.navigate(['/task/task-list']);  
-      },
-      error: (error) => {
-        console.error('Error updating task:', error);
-      }
-    });
-  }
+
+  
+  // private updateTask(taskData: ITask): void {
+  //   this.taskService.updateTask(this.taskId!, taskData).subscribe({
+  //     next: () => {
+  //       console.log('Task updated successfully');
+  //       this.router.navigate(['/task/task-list']);  
+  //     },
+  //     error: (error) => {
+  //       console.error('Error updating task:', error);
+  //     }
+  //   });
+  // }
+  
+
+  
 
   
   private createTask(taskData: ITask): void {
@@ -193,4 +200,33 @@ export class TaskCreateComponent implements OnInit {
       }
     });
   }
-}
+
+
+  private updateTask(taskData: ITask): void {
+    const updateTaskDto = {
+      Title: taskData.Title,
+      Description: taskData.Description,
+      Priority: taskData.Priority,
+      Status: taskData.Status,
+      DueDate: taskData.DueDate instanceof Date
+        ? taskData.DueDate.toISOString()
+        : new Date(taskData.DueDate).toISOString(),
+      ProjectId: Number(taskData.ProjectId),
+      AssignedUserIds: taskData.AssignedUsers?.map(user => user.UserId) || []
+    };
+  
+    this.taskService.updateTask(this.taskId!, updateTaskDto).subscribe({
+      next: () => {
+        this.router.navigate(['/task/task-list']);
+      },
+      error: (error) => {
+        console.error('Update Error:', error);
+        if (error.error && error.error.errors) {
+          const validationErrors = Object.values(error.error.errors).flat();
+          alert(`Validation Errors: ${validationErrors.join(', ')}`);
+        } else {
+          alert('Failed to update task');
+        }
+      }
+    });
+  }}

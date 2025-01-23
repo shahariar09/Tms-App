@@ -2,12 +2,8 @@
   <div class="row mb-3">
     <div class="col d-flex justify-content-between align-items-center">
       <h2>Project Board</h2>
-      <button class="btn btn-primary" (click)="navigateToCreateTask('Open')">
-        + Add Task
-      </button>
     </div>
   </div>
-
   <div class="row g-3" style="height: calc(100% - 60px);">
     <div class="col" *ngFor="let status of ['Open', 'Pending', 'InProgress', 'Done', 'Closed']">
       <div class="card h-100">
@@ -15,46 +11,93 @@
           <div class="d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">{{ status }}</h5>
             <button class="btn btn-outline-primary btn-sm" 
-                    (click)="navigateToCreateTask(status)" 
+                    (click)="openTaskModal(status)" 
                     style="width: 25px; height: 25px; line-height: 1; padding: 0; font-size: 18px; font-weight: bold;">
               +
             </button>
           </div>
         </div>
-
-        <div class="card-body task-list p-2"
-             [id]="status"
-             cdkDropList
-             [cdkDropListData]="boardColumns[status]"
-             [cdkDropListConnectedTo]="['Open', 'Pending', 'InProgress', 'Done', 'Closed']"
-             (cdkDropListDropped)="onDrop($event)"
-             [cdkDropListDisabled]="isProcessingDrop"
+        <div class="card-body task-list p-2" 
+             [id]="status" 
+             cdkDropList 
+             [cdkDropListData]="boardColumns[status]" 
+             [cdkDropListConnectedTo]="['Open', 'Pending', 'InProgress', 'Done', 'Closed']" 
+             (cdkDropListDropped)="onDrop($event)" 
+             [cdkDropListDisabled]="isProcessingDrop" 
              style="overflow-y: auto;">
-             <div class="card mb-2 task-card"
-             *ngFor="let task of boardColumns[status]"
-             cdkDrag
-             style="cursor: move;">
-          <div class="card-body p-2">
-            <h6 class="card-title mb-1">{{ task.Title }}</h6>
-            <p class="card-text small mb-1 text-muted">{{ task.Description }}</p>
-            <div class="d-flex justify-content-between align-items-center mb-1">
-              <span class="badge"
-                    [ngClass]="{
-                      'bg-danger': task.Priority === 'High',
-                      'bg-warning': task.Priority === 'Medium',
-                      'bg-info': task.Priority === 'Low'
-                    }">
-                {{ task.Priority }}
-              </span>
-              <small class="text-muted">Due: {{ formatDate(task.DueDate) }}</small>
+          <div class="card mb-2 task-card" 
+               *ngFor="let task of boardColumns[status]" 
+               cdkDrag 
+               style="cursor: move;">
+            <div class="card-body p-2">
+              <h6 class="card-title mb-1">{{ task.Title }}</h6>
+              <p class="card-text small mb-1 text-muted">{{ task.Description }}</p>
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="badge" 
+                      [ngClass]="{ 
+                        'bg-danger': task.Priority === 'High', 
+                        'bg-warning': task.Priority === 'Medium', 
+                        'bg-info': task.Priority === 'Low' 
+                      }">
+                  {{ task.Priority }}
+                </span>
+                <small class="text-muted">Due: {{formatDate(task.DueDate) }}</small>
+              </div>
+              <small class="text-muted d-block">
+                Assigned: {{ getAssignedUserNames(task.AssignedUsers) }}
+              </small>
             </div>
-            <small class="text-muted d-block">
-              Assigned: {{ getAssignedUserNames(task.AssignedUsers) }}
-            </small>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Task Creation Modal -->
+<div class="modal fade" id="taskCreateModal" tabindex="-1" aria-labelledby="taskCreateModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="taskCreateModalLabel">Create New Task</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="taskForm" (ngSubmit)="createTask()">
+          <div class="mb-3">
+            <label for="Title" class="form-label">Task Title</label>
+            <input type="text" class="form-control" id="Title" formControlName="Title" required>
+          </div>
+          <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="Description" formControlName="Description" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="Priority" class="form-label">Priority</label>
+            <select class="form-select" id="Priority" formControlName="Priority">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="DueDate" class="form-label">Due Date</label>
+            <input type="date" class="form-control" id="DueDate" formControlName="DueDate" required>
+          </div>
+          <div class="mb-3">
+            <label for="ProjectId" class="form-label">Project</label>
+            <select class="form-select" id="ProjectId" formControlName="ProjectId" required>
+              <option *ngFor="let project of projects" [value]="project.Id">
+                {{project.Name}}
+              </option>
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">Create Task</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
