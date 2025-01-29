@@ -4,7 +4,7 @@ import { authGuard } from './Features/auth.guard';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login/userLogin', pathMatch: 'full' },
+  { path: '', redirectTo: 'home/home-page', pathMatch: 'full' },
   
   {
     path: 'user',
@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./Features/login/login.module')
       .then(m => m.LoginModule)
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./Features/home/home.module')
+      .then(m => m.HomeModule)
   }
  
 ];

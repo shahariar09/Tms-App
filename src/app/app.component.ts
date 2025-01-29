@@ -41,10 +41,13 @@ export class AppComponent {
   isChangePasswordPage(): boolean {
     return this.router.url.includes('change-password');
   }
+  ishomePage(): boolean {
+    return this.router.url.includes('home-page');
+  }
 
   logout() {
     this.authService.logout(); // Clear token
-    this.router.navigate(['/login/userLogin']); // Redirect to login page
+    this.router.navigate(['/home/home-page']); // Redirect to login page
   }
   
   
